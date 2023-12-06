@@ -1,0 +1,110 @@
+/* Base styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1b1b1b; /* Dark background for CS2 theme */
+    color: #fff; /* White text for better contrast */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Center align the main content */
+}
+
+h1 {
+    color: #4CAF50; /* Green color, reminiscent of CS2 UI */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Main container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px; /* Adjust this width as needed */
+}
+
+/* Form container */
+.form-container {
+    flex: 1;
+    background-color: #333; /* Dark gray background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    color: #ddd; /* Light gray for labels */
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"] {
+    width: 100%; /* Full width of the form-group */
+    padding: 10px;
+    background-color: #222; /* Darker input background */
+    border: 1px solid #555; /* Dark border for inputs */
+    border-radius: 4px;
+    color: #fff; /* White text */
+    box-sizing: border-box;
+}
+
+/* Output container */
+.output-container {
+    flex: 1;
+    max-width: 400px; /* Limit the width of the output container */
+}
+
+#output {
+    width: 100%;
+    height: 400px; /* Default height */
+    background-color: #222; /* Slightly lighter background for contrast */
+    color: #fff; /* White text */
+    border: 1px solid #4CAF50; /* Green border */
+    border-radius: 4px;
+    padding: 10px;
+    box-sizing: border-box;
+    resize: vertical; /* Allow vertical resizing */
+}
+
+/* Submit button */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50; /* Green background */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #3e8e41; /* Darker green on hover */
+}
+
+.tooltip {
+    display: inline-block;
+    margin-left: 5px;
+    border-bottom: 1px dotted #4CAF50; /* Dotted underline for the question mark */
+    color: #4CAF50;
+    cursor: help; /* Cursor changes to indicate help/info */
+}
+
+/* Optional: Style for the tooltip text */
+.tooltip:hover::after {
+    content: attr(title);
+    position: absolute;
+    background: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    top: -5px;
+    left: 110%;
+    white-space: nowrap;
+}
