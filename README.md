@@ -1,6 +1,4 @@
 # CS2_CFG
-CS2 **server.cfg** CVars Editor / Generator
-
 A web app for CS2 server operators, it generates a pretty, commented **server.cfg** file.
 
 
