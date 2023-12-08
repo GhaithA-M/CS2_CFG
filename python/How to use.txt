@@ -1,0 +1,4 @@
+Open "cmd.exe" in this folder. (\CS2_CFG\python\cmd.exe)
+Copy this command and paste it into the cmd window:
+
+python commands.py gamemode_casual.cfg formatted_cvars.js
