@@ -1,5 +1,9 @@
-// cvars.js
-/* Example
+/*
+    Author: Ghaith Al-Maliki (Ralfidogg)
+    GitHub: https://github.com/GhaithA-M/CS2_CFG/
+*/
+
+/* Template for adding new CVars to the list:
 
     {
         normalName: 'ExampleName',
@@ -24,7 +28,7 @@ var cvarsData = [
     },
 // BHop CVars
     {
-        normalName: 'sv enablebunnyhopping',
+        normalName: 'Sv Enablebunnyhopping',
         cvarName: 'sv_enablebunnyhopping',
         defaultValue: '0',
         comment: 'Enable bunnyhopping (removes air-speed limit)',
@@ -33,7 +37,7 @@ var cvarsData = [
         enableTooltip: true
     },
     {
-        normalName: 'sv_autobunnyhopping',
+        normalName: 'Sv Autobunnyhopping',
         cvarName: 'sv_autobunnyhopping',
         defaultValue: 'false',
         comment: 'Enable auto jumping when holding space',
@@ -623,25 +627,25 @@ var cvarsData = [
         normalName: 'Mp Roundtime [minutes]',
         cvarName: 'mp_roundtime',
         defaultValue: '3',
-        comment: '',
+        comment: 'How many minutes each round takes.',
         category: 'gen',
         enableTooltip: false,
         description: ''
     },
     {
-        normalName: 'Mp Roundtime Hostage',
+        normalName: 'Mp Roundtime Hostage [minutes]',
         cvarName: 'mp_roundtime_hostage',
         defaultValue: '2',
-        comment: '',
+        comment: 'How many minutes each round of Hostage Rescue takes. If 0 then use mp_roundtime instead.',
         category: 'time',
         enableTooltip: false,
         description: ''
     },
     {
-        normalName: 'Mp Roundtime Defuse',
+        normalName: 'Mp Roundtime Defuse [minutes]',
         cvarName: 'mp_roundtime_defuse',
         defaultValue: '2.25',
-        comment: 'Typical Valve Official Casual defuse rounds are 90-100 seconds.',
+        comment: 'How many minutes each round of Bomb Defuse takes. If 0 then use mp_roundtime instead.',
         category: 'time',
         enableTooltip: false,
         description: ''

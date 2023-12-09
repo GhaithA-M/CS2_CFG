@@ -1,3 +1,8 @@
+/*
+    Author: Ghaith Al-Maliki (Ralfidogg)
+    GitHub: https://github.com/GhaithA-M/CS2_CFG/
+*/
+
 document.addEventListener('DOMContentLoaded', function() {
     var output = document.getElementById('output');
 
