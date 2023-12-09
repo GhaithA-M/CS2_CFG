@@ -467,7 +467,7 @@ var cvarsData = [
         normalName: 'Mp Death Drop Defuser',
         cvarName: 'mp_death_drop_defuser',
         defaultValue: '1',
-        comment: '',
+        comment: 'Drop defuser on player death',
         category: 'mp',
         enableTooltip: false,
         description: ''
@@ -476,10 +476,10 @@ var cvarsData = [
         normalName: 'Mp Death Drop Grenade',
         cvarName: 'mp_death_drop_grenade',
         defaultValue: '2',
-        comment: '0=none, 1=best, 2=current or best',
+        comment: '0=none, 1=best, 2=current or best 3=all grenades',
         category: 'mp',
-        enableTooltip: false,
-        description: ''
+        enableTooltip: true,
+        description: 'Which grenade to drop on player death: 0=none, 1=best, 2=current or best, 3=all grenades'
     },
     {
         normalName: 'Mp Death Drop Gun',
@@ -487,14 +487,14 @@ var cvarsData = [
         defaultValue: '1',
         comment: '0=none, 1=best, 2=current or best',
         category: 'mp',
-        enableTooltip: false,
-        description: ''
+        enableTooltip: true,
+        description: 'Which gun to drop on player death: 0=none, 1=best, 2=current or best'
     },
     {
         normalName: 'Mp Fists Replace Melee',
         cvarName: 'mp_fists_replace_melee',
         defaultValue: '1',
-        comment: '',
+        comment: 'If enabled then when melee weapon is dropped player will have fists, when melee weapon is picked',
         category: 'mp',
         enableTooltip: false,
         description: ''
@@ -512,7 +512,7 @@ var cvarsData = [
         normalName: 'Mp Force Pick Time',
         cvarName: 'mp_force_pick_time',
         defaultValue: '15',
-        comment: '',
+        comment: 'The amount of time a player has on the team screen to make a selection before being auto-teamed',
         category: 'time',
         enableTooltip: false,
         description: ''
@@ -523,14 +523,14 @@ var cvarsData = [
         defaultValue: '0',
         comment: 'Set to 1 for team only spectating.',
         category: 'mp',
-        enableTooltip: false,
-        description: ''
+        enableTooltip: true,
+        description: 'Restricts spectator modes for dead players'
     },
     {
         normalName: 'Mp Free Armor',
         cvarName: 'mp_free_armor',
         defaultValue: '2',
-        comment: '',
+        comment: 'Determines whether kevlar (1) and/or helmet (2) are given automatically',
         category: 'mp',
         enableTooltip: false,
         description: ''
@@ -539,7 +539,7 @@ var cvarsData = [
         normalName: 'Mp Freezetime [seconds]',
         cvarName: 'mp_freezetime',
         defaultValue: '5',
-        comment: '',
+        comment: 'How many seconds to keep players frozen when the round starts',
         category: 'gen',
         enableTooltip: false,
         description: ''
@@ -548,7 +548,7 @@ var cvarsData = [
         normalName: 'Mp Friendlyfire',
         cvarName: 'mp_friendlyfire',
         defaultValue: '1',
-        comment: '',
+        comment: 'Allows team members to injure other members of their team',
         category: 'ff',
         enableTooltip: false,
         description: ''
@@ -566,17 +566,17 @@ var cvarsData = [
         normalName: 'Mp Respawn Immunitytime',
         cvarName: 'mp_respawn_immunitytime',
         defaultValue: '0',
-        comment: '',
+        comment: 'How many seconds after respawn immunity lasts',
         category: 'time',
         enableTooltip: false,
-        description: ''
+        description: 'How many seconds after respawn immunity lasts. Set to negative value to disable warmup immunity.'
     },
     {
         normalName: 'Mp Halftime',
         cvarName: 'mp_halftime',
         defaultValue: '0',
-        comment: '',
-        category: 'time',
+        comment: 'Determines whether the match switches sides in a halftime event.',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -711,7 +711,7 @@ var cvarsData = [
         cvarName: 'mp_weapons_allow_typecount',
         defaultValue: '2',
         comment: '',
-        category: 'mp',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },
@@ -801,7 +801,7 @@ var cvarsData = [
         cvarName: 'mp_warmup_pausetimer',
         defaultValue: '0',
         comment: '',
-        category: 'mp',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },
@@ -810,7 +810,7 @@ var cvarsData = [
         cvarName: 'mp_halftime_pausetimer',
         defaultValue: '0',
         comment: '',
-        category: 'mp',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },
@@ -819,7 +819,7 @@ var cvarsData = [
         cvarName: 'mp_randomspawn',
         defaultValue: '0',
         comment: '',
-        category: 'mp',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },
