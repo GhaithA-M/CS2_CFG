@@ -1,3 +1,7 @@
+#   Author: Ghaith Al-Maliki (Ralfidogg)
+#   GitHub: https://github.com/GhaithA-M/CS2_CFG/
+#   Steam: https://steamcommunity.com/id/Ralfidogg/
+
 import sys
 
 def format_command(cvar_name, default_value, comment):

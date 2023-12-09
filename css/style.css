@@ -122,7 +122,7 @@ button:hover {
     background-color: #4caf50;
     color: #444;
     cursor: pointer;
-    padding: 10px;
+    padding: 15px;
     width: 100%;
     border: none;
     text-align: center;
@@ -136,6 +136,10 @@ button:hover {
     overflow: hidden;
     background-color: #444;
     margin-bottom: 10px;
+}
+
+.accordion-section {
+    margin-bottom: 5px;
 }
 
 .accordion-header.active + .accordion-content {

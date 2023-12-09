@@ -1,6 +1,7 @@
 /*
     Author: Ghaith Al-Maliki (Ralfidogg)
     GitHub: https://github.com/GhaithA-M/CS2_CFG/
+    Steam: https://steamcommunity.com/id/Ralfidogg/
 */
 
 /* Template for adding new CVars to the list:
@@ -21,7 +22,7 @@ var cvarsData = [
         normalName: 'Server Name',
         cvarName: 'hostname',
         defaultValue: 'Counter-Strike 2 Dedicated Server',
-        comment: 'Name of server, 45 characters max',
+        comment: 'Hostname for server.',
         category: 'gen',
         description: 'TOOLTIP',
         enableTooltip: false
@@ -33,7 +34,7 @@ var cvarsData = [
         defaultValue: '0',
         comment: 'Enable bunnyhopping (removes air-speed limit)',
         category: 'bhop',
-        description: 'Setting this to 1 disables "air-velocity clamping to 110% of maximum running speed"',
+        description: 'Allow player speed to exceed maximum running speed',
         enableTooltip: true
     },
     {
@@ -49,7 +50,7 @@ var cvarsData = [
         normalName: 'Stamina Recovery Rate',
         cvarName: 'sv_staminarecoveryrate',
         defaultValue: '60',
-        comment: 'Rate at which player recovers stamina',
+        comment: 'Rate at which stamina recovers (units/sec)',
         category: 'bhop',
         description: 'TOOLTIP',
         enableTooltip: true
@@ -67,7 +68,7 @@ var cvarsData = [
         normalName: 'Maximum Stamina',
         cvarName: 'sv_staminamax',
         defaultValue: '80',
-        comment: 'Maximum amount of player stamina',
+        comment: 'Maximum stamina penalty',
         category: 'bhop',
         description: 'TOOLTIP',
         enableTooltip: true
@@ -75,8 +76,8 @@ var cvarsData = [
     {
         normalName: 'Landing Stamina Cost',
         cvarName: 'sv_staminalandcost',
-        defaultValue: '0',
-        comment: 'Stamina cost for landing',
+        defaultValue: '0.05',
+        comment: 'Stamina penalty for landing',
         category: 'bhop',
         description: 'TOOLTIP',
         enableTooltip: true
@@ -84,8 +85,8 @@ var cvarsData = [
     {
         normalName: 'Jumping Stamina Cost',
         cvarName: 'sv_staminajumpcost',
-        defaultValue: '0',
-        comment: 'Stamina cost for jumping',
+        defaultValue: '0.08',
+        comment: 'Stamina penalty for jumping',
         category: 'bhop',
         description: 'TOOLTIP',
         enableTooltip: true
