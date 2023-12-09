@@ -11,7 +11,7 @@ def format_command(cvar_name, default_value, comment):
         "cvarName": cvar_name,
         "defaultValue": default_value,
         "comment": comment,
-        "category": "misc",
+        "category": "custom",
         "enableTooltip": "false",
         "description": ""
     }

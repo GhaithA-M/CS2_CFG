@@ -1,12 +1,12 @@
 # CS2_CFG
-A web app for CS2 server operators, it generates a pretty, commented **server.cfg** file.
+A web app for CS2 server operators, it generates organized and commented **server.cfg** cvars.
 
 
-The CVars come from the default **gamemode_casual.cfg** configuration file that runs on fresh CS2 servers.
-Included in the **python** folder is a simple script which automates the process of adapting the **gamemode_casual.cfg** file to the format accepted by **cvars.js**.
+The cvars are derived from the default **gamemode_casual.cfg** configuration file that runs on fresh official CS2 casual servers.
+Included in the **python** folder is a simple script which automates the process of adapting the **gamemode_casual.cfg** file to the syntax format accepted by **cvars.js**.
 
 
-Input your cvar values and copy / paste the output into your **server.cfg** file.
+Input your cvar variable and copy / paste the output into your **server.cfg** file.
 
 ----------------------------------------------------------------------------------
 Custom **cvars.js**:
@@ -40,4 +40,4 @@ to looking like this:
         description: ''
     },
 ```
-The default category is 'misc'.
+The default category is 'custom'.

@@ -1,7 +1,9 @@
-Open "cmd.exe" in this folder. (\CS2_CFG\python\cmd.exe)
+Open **cmd.exe** in this folder. (\CS2_CFG\python\cmd.exe)
 Copy this command and paste it into the cmd window:
 
 python commands.py gamemode_casual.cfg formatted_cvars.js
 
-Input file: "gamemode_casual.cfg"
-Output file: "formatted_cvars.js"
+Input file: **gamemode_casual.cfg**
+Output file: **formatted_cvars.js**
+
+Input the syntax-correct cvars in your **.cfg** file to **gamemode_casual.cfg**.

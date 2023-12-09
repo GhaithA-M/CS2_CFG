@@ -4,7 +4,7 @@
     Steam: https://steamcommunity.com/id/Ralfidogg/
 */
 
-/* Template for adding new CVars to the list:
+/* Template for manually adding new cvars to the list:
 
     {
         normalName: 'InputFieldName',
@@ -1012,4 +1012,6 @@ var cvarsData = [
         enableTooltip: false,
         description: ''
     },
+    // Add more cvars here
+
 ];
