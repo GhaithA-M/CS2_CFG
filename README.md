@@ -8,6 +8,11 @@ Included in the **python** folder is a simple script which automates the process
 
 Input your cvar values and copy / paste the output into your **server.cfg** file.
 
+----------------------------------------------------------------------------------
+Custom **cvars.js**:
+
+For creating your own **cvars.js**, I've provided this python script. Inside there's an example output, based on the provided **gamemode_casual.cfg** file.
+
 
 When formatted by the commands.py script a cvar will go from looking like this:
 ```c
