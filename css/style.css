@@ -1,20 +1,40 @@
 /* Base styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #1b1b1b; /* Dark background for CS2 theme */
-    color: #fff; /* White text for better contrast */
+    background-color: #1b1b1b; /* Background */
+    color: #fff; /* Text */
     margin: 0;
     padding: 20px;
     display: flex;
-    justify-content: center; /* Center align the main content */
+    justify-content: center; /* Align the main content */
 }
 
 h1 {
-    color: #4CAF50; /* Green color, reminiscent of CS2 UI */
+    color: #4CAF50; /* Color */
     font-size: 1.8em;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.description {
+    color: #ddd;
+    font-size: 0.8em;
+    margin-bottom: 10px;
+}
+
+.checkbox-container {
+    margin: 10px 0; /* Margin for spacing */
+    display: flex;
+    align-items: center; /* Aligns the checkbox and label */
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 5px; /* Space between checkbox and label */
+}
+
+.checkbox-container label {
+    color: #fff; /* Adjust the color as needed */
 }
 
 /* Main container */
@@ -30,7 +50,7 @@ h1 {
 /* Form container */
 .form-container {
     flex: 1;
-    background-color: #333; /* Dark gray background */
+    background-color: #333; /* Background */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -41,47 +61,47 @@ h1 {
 }
 
 .form-group label {
-    color: #ddd; /* Light gray for labels */
+    color: #ddd; /* Labels */
     display: block;
     margin-bottom: 5px;
 }
 
 .form-group input[type="text"] {
-    width: 100%; /* Full width of the form-group */
+    width: 100%; /* Width of the form-group */
     padding: 10px;
-    background-color: #222; /* Darker input background */
-    border: 1px solid #555; /* Dark border for inputs */
+    background-color: #222; /* Input background */
+    border: 1px solid #555; /* Border for inputs */
     border-radius: 4px;
-    color: #fff; /* White text */
+    color: #fff; /* Text */
     box-sizing: border-box;
 }
 
 /* Output container */
 .output-container {
     flex: 1;
-    max-width: 800px; /* Limit the width of the output container */
+    max-width: 800px; /* Width of the output container */
 }
 
 #output {
-    min-width: 225%; /* Minimum width */
-    max-width: 100%; /* Maximum width */
-    min-height: 0px; /* Minimum height */
+    min-width: 225%;
+    max-width: 100%;
+    min-height: 0px;
     background-color: #222;
     color: #fff;
     border: 1px solid #4CAF50;
     border-radius: 4px;
     padding: 10px;
     box-sizing: border-box;
-    resize: none; /* Vertical and horizontal resizing */
-    overflow: clip; /* Add scrollbars as needed */
+    resize: none;
+    overflow: clip;
 }
 
-/* Submit button */
+/* Button */
 button {
     width: 100%;
     padding: 10px;
-    background-color: #4CAF50; /* Green background */
-    color: #fff; /* White text */
+    background-color: #4CAF50; /* Background */
+    color: #fff; /* Text */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -89,13 +109,37 @@ button {
 }
 
 button:hover {
-    background-color: #3e8e41; /* Darker green on hover */
+    background-color: #3e8e41; /* Color on hover */
+}
+
+.resetButton-container {
+    width: 102px;
+    padding: 4px 4px;
+    background-color: #af4c4c7a; /* Background */
+    color: #fff; /* Text */
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    
+}
+
+#resetButton {
+    width: auto;
+    padding: 3px 6px;
+    background-color: #ff00007a; /* Background  */
+    color: #fff; /* Text */
+    position: sticky;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black; /* Optional styling */
 }
 
 .tooltip:hover::after {
@@ -120,7 +164,7 @@ button:hover {
 
 .accordion-header {
     background-color: #4caf50;
-    color: #fffff;
+    color: #ffffff;
     cursor: pointer;
     padding: 15px;
     width: 100%;
@@ -135,7 +179,7 @@ button:hover {
     display: none;
     overflow: hidden;
     background-color: #444;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .accordion-section {
@@ -146,8 +190,44 @@ button:hover {
     display: block;
 }
 
-.description {
-    color: #ddd;
-    font-size: 0.8em;
-    margin-bottom: 10px;
+.github-hyperlink {
+    color: #4caf50;
+    background-color: #66c0f4;
+    text-align: center;
+    border-radius: 5px;
+    width: 30%;
+    padding: 3px;
+    margin: 5px auto;
+}
+
+.h9-hyperlink {
+    color: #4caf50;
+    background-color: #5e4c2a;
+    text-align: center;
+    border-radius: 5px;
+    width: 43%;
+    padding: 3px;
+    margin: 0 auto;
+}
+
+.steam-hyperlink {
+    color: #4caf50;
+    background-color: #4779a1;
+    text-align: center;
+    border-radius: 5px;
+    width: 17%;
+    padding: 3px;
+    margin: 5px auto;
+}
+
+/* Container for links */
+.link-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items */
+    margin-top: 0px; /* Space above the link container */
+}
+
+/* Individual link blocks */
+.github-hyperlink, .h9-hyperlink, .steam-hyperlink {
 }

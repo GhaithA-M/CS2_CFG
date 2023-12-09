@@ -8,6 +8,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     /* 2. Get the element that will display the generated configuration output */
     var output = document.getElementById('output');
+    var showAllCheckbox = document.getElementById('showAllCheckbox');
 
     /* 3. Function to create form inputs and tooltips for each category */
     function createFormInputs(category, cvars) {
@@ -17,25 +18,28 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!form) return;
 
         /* 3.3 Loop through each cvar in the category */
-            cvars.forEach(cvar => {
+        cvars.forEach(cvar => {
             /* 3.3.1 Create a container for each cvar input */
             var div = document.createElement('div');
             div.className = 'form-group';
-            
+
             /* 3.3.2 Create and set up the label for the input field */
             var label = document.createElement('label');
             label.htmlFor = cvar.cvarName;
             label.textContent = cvar.normalName + ':';
             div.appendChild(label);
-            
+
             /* 3.3.3 Create and set up the input field */
             var input = document.createElement('input');
             input.type = 'text';
             input.id = cvar.cvarName;
             input.name = cvar.cvarName;
-            input.value = cvar.defaultValue;
+            input.value = localStorage.getItem(cvar.cvarName) || cvar.defaultValue;
             /* 3.3.4 Attach an event listener to update the output when the input changes */
-            input.addEventListener('input', updateOutput); /* Attach event listener */
+            input.addEventListener('input', function() {
+                localStorage.setItem(cvar.cvarName, input.value);
+                updateOutput();
+            });
             div.appendChild(input);
 
             /* 3.3.5 Create a tooltip if needed */
@@ -77,23 +81,18 @@ document.addEventListener('DOMContentLoaded', function() {
         /* 5.2 Calculate padding for alignment in the output */
         const maxCvarLength = Math.max(...cvarsData.map(cvar => cvar.cvarName.length));
         const maxValueLength = Math.max(...cvarsData.map(cvar => document.getElementById(cvar.cvarName)?.value.trim().length || 0));
-
         /* 5.3 Loop through each cvar to generate the configuration lines */
         cvarsData.forEach(function(cvar) {
             /* 5.3.1 Get the input element for the cvar */
             var inputElement = document.getElementById(cvar.cvarName);
+            /* 5.3.2 Get the trimmed value of the input */
             if (inputElement) {
-                /* 5.3.2 Get the trimmed value of the input */
                 var value = inputElement.value.trim();
                 /* 5.3.3 If the value is different from the default, include it in the output */
-                if (value !== '' && value !== cvar.defaultValue) {
+                if (value !== '' && (value !== cvar.defaultValue || showAllCheckbox.checked)) {
                     const paddedCvar = cvar.cvarName.padEnd(maxCvarLength + 4, ' ');
                     const paddedValue = ('"' + value + '"').padEnd(maxValueLength + 4, ' ');
-                    output.value += paddedCvar + paddedValue;
-                    if (cvar.comment) {
-                        output.value += ' // ' + cvar.comment;
-                    }
-                    output.value += '\n';
+                    output.value += paddedCvar + paddedValue + '// ' + cvar.comment + '\n';
                 }
             }
         });
@@ -114,4 +113,23 @@ document.addEventListener('DOMContentLoaded', function() {
     /* 8. Set up accordion functionality and update the output initially */
     setupAccordion();
     updateOutput();
+
+    /* 9. Add event listeners to the reset button */
+    document.getElementById('resetButton').addEventListener('click', function() {
+        // Add a confirmation dialog
+        if (confirm("Are you sure you want to reset all settings to their default values?")) {
+            cvarsData.forEach(cvar => {
+                var inputElement = document.getElementById(cvar.cvarName);
+                if (inputElement) {
+                    inputElement.value = cvar.defaultValue;
+                    localStorage.setItem(cvar.cvarName, cvar.defaultValue);
+                }
+            });
+            updateOutput();
+        }
+    });
+
+    showAllCheckbox.addEventListener('change', function() {
+        updateOutput();
+    });
 });

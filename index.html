@@ -21,14 +21,20 @@
             <div class="description">
                 <p> Generate a custom server config file for Counter-Strike 2 dedicated servers
                     <br></br>
-                    Format: "sv_cvar value // Description"
-                    <br></br>
                     Lines will only print if the default value is changed (default: gamemode_casual.cfg)
                 </p>
             </div>
 
-            <div class="accordion">
+            <div class="checkbox-container">
+                <input type="checkbox" id="showAllCheckbox">
+                <label for="showAllCheckbox">Show all commands, including defaults</label>
+            </div>
 
+            <div class="resetButton-container">
+                <button id="resetButton">Reset to default</button>
+                </div>
+
+            <div class="accordion">
                 <div class="accordion-section">
                     <button class="accordion-header">General</button>
                     <div class="accordion-content">
@@ -116,22 +122,27 @@
                         </form>
                     </div>
                 </div>
-
             </div>
 
-            <div class="copyright" id="copyright">
-                <a href="https://bit.ly/3thnh8a" target="_blank">Copyright © 2023 GAM</a>
-                <!-- "https://steamcommunity.com/id/Ralfidogg/" -->
-                <!-- Opens new tab -->
+            <div class="link-container">
+                <div class="github-hyperlink" id="github">
+                    <a href="https://github.com/GhaithA-M/CS2_CFG" target="_blank">Github Repo</a>
+                </div>
+            
+                <div class="h9-hyperlink" id="h9minics2">
+                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3071237177" target="_blank">hoejhus9_mini_cs2</a>
+                </div>
+            
+                <div class="steam-hyperlink" id="copyright">
+                    <a href="https://bit.ly/3thnh8a" target="_blank">Steam</a>
+                </div>
             </div>
-
         </div>
-
+        
         <div class="output-container">
             <label for="output">Generated server.cfg:</label>
             <textarea id="output" rows="20"></textarea>
         </div>
-
     </div>
     <script src="js/script.js"></script>
     <script src="js/cvars.js"></script>
