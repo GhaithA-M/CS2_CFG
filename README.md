@@ -7,3 +7,33 @@ Included in the **python** folder is a simple script which automates the process
 
 
 Input your cvar values and copy / paste the output into your **server.cfg** file.
+
+
+A cvar will look like this when formatted by the commands.py script:
+```c
+mp_death_drop_grenade								2			// 0=none, 1=best, 2=current or best
+mp_death_drop_gun									1			// 0=none, 1=best, 2=current or best
+```
+
+```js
+    {
+        normalName: 'Mp Death Drop Grenade',
+        cvarName: 'mp_death_drop_grenade',
+        defaultValue: '2',
+        comment: '0=none, 1=best, 2=current or best',
+        category: 'misc',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Death Drop Gun',
+        cvarName: 'mp_death_drop_gun',
+        defaultValue: '1',
+        comment: '0=none, 1=best, 2=current or best',
+        category: 'misc',
+        enableTooltip: false,
+        description: ''
+    },
+```
+
+The default category is 'misc'.

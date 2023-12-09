@@ -7,12 +7,13 @@
 /* Template for adding new CVars to the list:
 
     {
-        normalName: 'ExampleName',
+        normalName: 'InputFieldName',
         cvarName: 'sv_cvar',
         defaultValue: '69',
         comment: 'CONFIG_COMMENT',
+        category: 'misc',
         description: 'TOOLTIP',
-        enableTooltip: true
+        enableTooltip: false
     },
 
 */

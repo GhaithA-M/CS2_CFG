@@ -11,8 +11,10 @@ body {
 
 h1 {
     color: #4CAF50; /* Green color, reminiscent of CS2 UI */
+    font-size: 1.8em;
     text-align: center;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Main container */
@@ -74,7 +76,6 @@ h1 {
     overflow: clip; /* Add scrollbars as needed */
 }
 
-
 /* Submit button */
 button {
     width: 100%;
@@ -117,10 +118,9 @@ button:hover {
     opacity: 1;
 }
 
-
 .accordion-header {
     background-color: #4caf50;
-    color: #444;
+    color: #fffff;
     cursor: pointer;
     padding: 15px;
     width: 100%;
@@ -144,4 +144,10 @@ button:hover {
 
 .accordion-header.active + .accordion-content {
     display: block;
+}
+
+.description {
+    color: #ddd;
+    font-size: 0.8em;
+    margin-bottom: 10px;
 }
