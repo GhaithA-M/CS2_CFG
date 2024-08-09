@@ -1,9 +1,14 @@
-Open **cmd.exe** in this folder. (\CS2_CFG\python\cmd.exe)
-Copy this command and paste it into the cmd window:
+The purpose of this script is to adapt your existing *.cfg file to be compatible with the "script.js" that reads the "cvars.js" file
+
+1. Copy / paste the existing cvars in your *.cfg file to "gamemode_casual.cfg".
+
+2. Open **cmd.exe** in this folder (\CS2_CFG\python\cmd.exe)
+
+3. Copy this command and paste it into the cmd window:
 
 python commands.py gamemode_casual.cfg formatted_cvars.js
 
-Input file: **gamemode_casual.cfg**
-Output file: **formatted_cvars.js**
+Input file: "gamemode_casual.cfg"
+Output file: "formatted_cvars.js"
 
-Input the syntax-correct cvars in your **.cfg** file to **gamemode_casual.cfg**.
+4. Copy/paste the newly generated syntax-compatible cvars from your "formatted_cvars.js" to "cvars.js" to use them in a local version of this web-app

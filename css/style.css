@@ -1,16 +1,80 @@
 /* Base styles */
 body {
+    min-width: 25px; /* Width of the output container */
     font-family: 'Arial', sans-serif;
     background-color: #1b1b1b; /* Background */
     color: #fff; /* Text */
     margin: 0;
-    padding: 20px;
+    padding: 0;
     display: flex;
-    justify-content: center; /* Align the main content */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height */
 }
 
+/* Centered container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px; /* Adjust this width as needed */
+    padding: 20px;
+    box-sizing: border-box;
+    flex-wrap: wrap; /* Allows wrapping for smaller screens */
+}
+
+/* Form container */
+.form-container {
+    flex: 1;
+    background-color: #333; /* Background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    min-width: 50px; /* Minimum width for mobile */
+    max-width: 260px;
+}
+
+/* Output container */
+.output-container {
+    flex: 1;
+    min-width: 300px; /* Minimum width for mobile */
+}
+
+#output {
+    width: 100%;
+    height: 800px;
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+    padding: 10px;
+    resize: both;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-container, .output-container {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    #output {
+        height: 400px;
+    }
+}
+
+/* Other styles */
 h1 {
-    color: #4CAF50; /* Color */
+    color: #4CAF50;
     font-size: 1.8em;
     text-align: center;
     margin-top: 10px;
@@ -24,36 +88,17 @@ h1 {
 }
 
 .checkbox-container {
-    margin: 10px 0; /* Margin for spacing */
+    margin: 10px 0;
     display: flex;
-    align-items: center; /* Aligns the checkbox and label */
+    align-items: center;
 }
 
 .checkbox-container input[type="checkbox"] {
-    margin-right: 5px; /* Space between checkbox and label */
+    margin-right: 5px;
 }
 
 .checkbox-container label {
-    color: #fff; /* Adjust the color as needed */
-}
-
-/* Main container */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 20px;
-    width: 100%;
-    max-width: 800px; /* Adjust this width as needed */
-}
-
-/* Form container */
-.form-container {
-    flex: 1;
-    background-color: #333; /* Background */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 
 .form-group {
@@ -61,47 +106,27 @@ h1 {
 }
 
 .form-group label {
-    color: #ddd; /* Labels */
+    color: #ddd;
     display: block;
-    margin-bottom: 5px;
+    margin: 10px 0 0 0;
 }
 
 .form-group input[type="text"] {
-    width: 100%; /* Width of the form-group */
+    width: 100%;
     padding: 10px;
-    background-color: #222; /* Input background */
-    border: 1px solid #555; /* Border for inputs */
-    border-radius: 4px;
-    color: #fff; /* Text */
-    box-sizing: border-box;
-}
-
-/* Output container */
-.output-container {
-    flex: 1;
-    max-width: 800px; /* Width of the output container */
-}
-
-#output {
-    min-width: 225%;
-    max-width: 100%;
-    min-height: 0px;
     background-color: #222;
-    color: #fff;
-    border: 1px solid #4CAF50;
+    border: 1px solid #555;
     border-radius: 4px;
-    padding: 10px;
+    color: #fff;
     box-sizing: border-box;
-    resize: none;
-    overflow: clip;
+    margin: 0 0 10px 0;
 }
 
-/* Button */
 button {
     width: 100%;
     padding: 10px;
-    background-color: #4CAF50; /* Background */
-    color: #fff; /* Text */
+    background-color: #4CAF50;
+    color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -109,27 +134,26 @@ button {
 }
 
 button:hover {
-    background-color: #3e8e41; /* Color on hover */
+    background-color: #3e8e41;
 }
 
 .resetButton-container {
     width: 102px;
-    padding: 4px 4px;
-    background-color: #af4c4c7a; /* Background */
-    color: #fff; /* Text */
+    padding: 4px;
+    background-color: #af4c4c7a;
+    color: #fff;
     border: none;
     border-radius: 8px;
     margin-bottom: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    
 }
 
 #resetButton {
     width: auto;
     padding: 3px 6px;
-    background-color: #ff00007a; /* Background  */
-    color: #fff; /* Text */
+    background-color: #ff00007a;
+    color: #fff;
     position: sticky;
     border: none;
     border-radius: 8px;
@@ -194,9 +218,10 @@ button:hover {
     color: #4caf50;
     background-color: #66c0f4;
     text-align: center;
+    font-size: 15px;
     border-radius: 5px;
-    width: 30%;
-    padding: 3px;
+    width: 50%;
+    padding: 5px;
     margin: 5px auto;
 }
 
@@ -204,8 +229,9 @@ button:hover {
     color: #4caf50;
     background-color: #5e4c2a;
     text-align: center;
+    font-size: 25px;
     border-radius: 5px;
-    width: 43%;
+    width: 50%;
     padding: 3px;
     margin: 0 auto;
 }
@@ -214,9 +240,10 @@ button:hover {
     color: #4caf50;
     background-color: #4779a1;
     text-align: center;
+    font-size: 15px;
     border-radius: 5px;
-    width: 17%;
-    padding: 3px;
+    width: 50%;
+    padding: 5px;
     margin: 5px auto;
 }
 
@@ -224,10 +251,6 @@ button:hover {
 .link-container {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Align items */
-    margin-top: 0px; /* Space above the link container */
+    align-items: center;
 }
 
-/* Individual link blocks */
-.github-hyperlink, .h9-hyperlink, .steam-hyperlink {
-}

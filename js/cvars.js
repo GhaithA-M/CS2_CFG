@@ -20,9 +20,9 @@
 
 var cvarsData = [
     {
-        normalName: 'Server Name',
+        normalName: 'Server Hostname',
         cvarName: 'hostname',
-        defaultValue: 'Counter-Strike 2 Dedicated Server',
+        defaultValue: 'CS2 Dedicated Server',
         comment: 'Hostname for server.',
         category: 'gen',
         description: 'TOOLTIP',
