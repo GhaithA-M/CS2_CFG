@@ -217,29 +217,21 @@ button:hover {
     color: #4caf50;
     background-color: #66c0f4;
     text-align: center;
-    font-size: 15px;
+    font-size: 12px;
     border-radius: 5px;
     width: 50%;
     padding: 5px;
-    margin: 5px auto;
-}
-
-.h9-hyperlink {
-    color: #4caf50;
-    background-color: #5e4c2a;
-    text-align: center;
-    font-size: 25px;
-    border-radius: 5px;
-    width: 50%;
-    padding: 3px;
-    margin: 0 auto;
+    margin-top: 5px auto;
+    margin-bottom: 5px auto;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .steam-hyperlink {
     color: #4caf50;
     background-color: #4779a1;
     text-align: center;
-    font-size: 15px;
+    font-size: 12px;
     border-radius: 5px;
     width: 50%;
     padding: 5px;
