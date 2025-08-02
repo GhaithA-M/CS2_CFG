@@ -1,0 +1,1 @@
+python commands.py server.cfg output.json

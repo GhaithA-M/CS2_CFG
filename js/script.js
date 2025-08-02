@@ -19,38 +19,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /* 3. Function to load all config files at once */
     async function loadAllConfigs() {
-        const configFiles = [
-            'custom.json',
-            'gamemode_casual.json',
-            'gamemode_competitive.json',
-            'gamemode_deathmatch.json',
-            'gamemode_armsrace.json',
-            'gamemode_demolition.json',
-            'gamemode_workshop.json',
-            'gamemode_teamdeathmatch.json',
-            'gamemode_retakecasual.json',
-            'gamemode_cooperative.json',
-            'gamemode_coopmission.json',
-            'gamemode_competitive2v2.json',
-            'gamemode_dm_freeforall.json'
-        ];
+        // custom.json is already loaded via script tag, so add it to allConfigs
+        if (typeof cvarsData !== 'undefined' && cvarsData.length > 0) {
+            allConfigs['custom.json'] = [...cvarsData];
+            console.log(`Loaded custom.json with ${cvarsData.length} commands`);
+        }
 
-        for (const filename of configFiles) {
+        // Get the list of available config files from the dropdown
+        const availableConfigs = [];
+        for (let i = 0; i < configSelector.options.length; i++) {
+            const option = configSelector.options[i];
+            if (option.value !== 'custom.json') {
+                availableConfigs.push(option.value);
+            }
+        }
+
+        // Try to load each available config file
+        for (const filename of availableConfigs) {
             try {
-                // Determine the correct path based on filename
-                let filePath;
-                if (filename === 'custom.json') {
-                    filePath = `js/${filename}`;
-                } else {
-                    filePath = `js/cfg/${filename}`;
-                }
-                
+                const filePath = `js/cfg/${filename}`;
                 const response = await fetch(filePath);
                 if (response.ok) {
                     const text = await response.text();
                     
-                    // Extract the cvarsData array from the JavaScript file
-                    const match = text.match(/var cvarsData = (\[[\s\S]*?\]);/);
+                    // Extract the unique variable name and data from the JavaScript file
+                    const varName = filename.replace('gamemode_', '').replace('.json', '');
+                    const pattern = new RegExp(`var cvarsData_${varName} = (\\[[\\s\\S]*?\\]);`);
+                    const match = text.match(pattern);
                     if (match) {
                         const jsonStr = match[1];
                         const configData = JSON.parse(jsonStr);
@@ -89,6 +84,39 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(`Switched to ${filename} with ${cvarsData.length} commands`);
         } else {
             console.error(`Config ${filename} not found in loaded configs`);
+            // If the requested config isn't loaded, try to load it on demand
+            loadConfigOnDemand(filename);
+        }
+    }
+
+    /* 4.5 Function to load a config file on demand */
+    async function loadConfigOnDemand(filename) {
+        try {
+            const filePath = `js/cfg/${filename}`;
+            const response = await fetch(filePath);
+            if (response.ok) {
+                const text = await response.text();
+                
+                // Extract the unique variable name and data from the JavaScript file
+                const varName = filename.replace('gamemode_', '').replace('.json', '');
+                const pattern = new RegExp(`var cvarsData_${varName} = (\\[[\\s\\S]*?\\]);`);
+                const match = text.match(pattern);
+                if (match) {
+                    const jsonStr = match[1];
+                    const configData = JSON.parse(jsonStr);
+                    allConfigs[filename] = configData;
+                    
+                    // Now switch to the newly loaded config
+                    switchToConfig(filename);
+                    console.log(`Loaded ${filename} on demand with ${configData.length} commands`);
+                }
+            } else {
+                console.error(`Failed to load ${filename} - file not found`);
+                alert(`Config ${filename} could not be loaded. Please make sure the file exists.`);
+            }
+        } catch (error) {
+            console.error(`Error loading ${filename}:`, error);
+            alert(`Error loading ${filename}. Please check the browser console for details.`);
         }
     }
 

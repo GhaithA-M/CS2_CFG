@@ -5,217 +5,318 @@
     Steam: https://steamcommunity.com/id/Ralfidogg/
 */
 
-/* Base styles */
-body {
-    min-width: 25px; /* Width of the output container */
-    font-family: 'Arial', sans-serif;
-    background-color: #1b1b1b; /* Background */
-    color: #fff; /* Text */
+/* Modern CSS Reset and Base Styles */
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Centered container */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px; /* Adjust this width as needed */
-    padding: 20px;
     box-sizing: border-box;
-    flex-wrap: wrap; /* Allows wrapping for smaller screens */
 }
 
-/* Form container */
-.form-container {
-    flex: 1;
-    background-color: #333; /* Background */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    min-width: 50px; /* Minimum width for mobile */
-    max-width: 260px;
-}
-
-/* Output container */
-.output-container {
-    flex: 1;
-    min-width: 300px; /* Minimum width for mobile */
-}
-
-#output {
-    width: 100%;
-    height: 800px;
-    background-color: #222;
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #1b1b1b;
     color: #fff;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Modern Container Layout */
+.container {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+    min-height: calc(100vh - 30px);
+}
+
+/* Dark Form Container */
+.form-container {
+    background-color: #333;
     border: 1px solid #4CAF50;
-    border-radius: 4px;
-    padding: 10px;
-    resize: both;
-    overflow: auto;
-    box-sizing: border-box;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .form-container, .output-container {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    #output {
-        height: 400px;
-    }
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #4CAF50, transparent);
 }
 
-/* Other styles */
+/* Modern Typography */
 h1 {
     color: #4CAF50;
-    font-size: 1.8em;
+    font-size: 1.3rem;
+    font-weight: 700;
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
 }
 
 .description {
     color: #ddd;
-    font-size: 0.8em;
-    margin-bottom: 10px;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 400;
 }
 
+/* Dark Config Selector */
 .config-selector-container {
-    margin: 15px 0;
-    padding: 10px;
-    background-color: #444;
-    border-radius: 4px;
-    border: 1px solid #555;
+    background-color: #2a2a2a;
+    border: 1px solid #4CAF50;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 18px;
+    transition: all 0.3s ease;
+}
+
+.config-selector-container:hover {
+    background-color: #3a3a3a;
+    transform: translateY(-2px);
 }
 
 .config-selector-container label {
     color: #fff;
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .config-selector-container select {
     width: 100%;
-    padding: 8px;
+    padding: 10px 14px;
     background-color: #222;
     border: 1px solid #555;
-    border-radius: 4px;
+    border-radius: 6px;
     color: #fff;
-    margin-bottom: 8px;
-    box-sizing: border-box;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .config-selector-container select:focus {
     outline: none;
     border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
 }
 
 .config-selector-container button {
     width: 100%;
-    padding: 8px;
+    padding: 10px 16px;
     background-color: #4CAF50;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .config-selector-container button:hover {
     background-color: #3e8e41;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
+/* Dark Checkbox */
 .checkbox-container {
-    margin: 10px 0;
+    margin: 15px 0;
     display: flex;
     align-items: center;
+    padding: 12px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    border: 1px solid #555;
 }
 
 .checkbox-container input[type="checkbox"] {
-    margin-right: 5px;
+    margin-right: 12px;
+    width: 18px;
+    height: 18px;
+    accent-color: #4CAF50;
 }
 
 .checkbox-container label {
     color: #fff;
+    font-weight: 500;
+    cursor: pointer;
 }
 
+/* Dark Reset Button */
+.resetButton-container {
+    margin: 15px 0;
+}
+
+#resetButton {
+    width: 100%;
+    padding: 10px 16px;
+    background-color: #af4c4c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#resetButton:hover {
+    background-color: #8b3a3a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(175, 76, 76, 0.3);
+}
+
+/* Dark Accordion */
+.accordion-section {
+    margin-bottom: 6px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #2a2a2a;
+    border: 1px solid #555;
+    transition: all 0.3s ease;
+}
+
+.accordion-section:hover {
+    background-color: #3a3a3a;
+    transform: translateX(4px);
+}
+
+.accordion-header {
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+    padding: 12px 16px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.accordion-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.accordion-header:hover::before {
+    left: 100%;
+}
+
+.accordion-header.active {
+    background-color: #3e8e41;
+}
+
+.accordion-content {
+    padding: 15px;
+    display: none;
+    background-color: #444;
+}
+
+.accordion-header.active + .accordion-content {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dark Form Groups */
 .form-group {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    position: relative;
 }
 
 .form-group label {
     color: #ddd;
     display: block;
-    margin: 10px 0 0 0;
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: capitalize;
 }
 
 .form-group input[type="text"] {
     width: 100%;
-    padding: 10px;
+    padding: 10px 14px;
     background-color: #222;
     border: 1px solid #555;
-    border-radius: 4px;
+    border-radius: 6px;
     color: #fff;
-    box-sizing: border-box;
-    margin: 0 0 10px 0;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.form-group input[type="text"]:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+    background-color: #2a2a2a;
 }
 
-button:hover {
-    background-color: #3e8e41;
+.form-group input[type="text"]::placeholder {
+    color: #888;
 }
 
-.resetButton-container {
-    width: 102px;
-    padding: 4px;
-    background-color: #af4c4c7a;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    margin-bottom: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#resetButton {
-    width: auto;
-    padding: 3px 6px;
-    background-color: #ff00007a;
-    color: #fff;
-    position: sticky;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
+/* Dark Tooltip */
 .tooltip {
     position: relative;
     display: inline-block;
+    margin-left: 8px;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(76, 175, 80, 0.2);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 18px;
+    font-size: 12px;
+    cursor: help;
+    transition: all 0.3s ease;
+}
+
+.tooltip:hover {
+    background-color: rgba(76, 175, 80, 0.4);
+    transform: scale(1.1);
 }
 
 .tooltip:hover::after {
@@ -227,74 +328,218 @@ button:hover {
     background-color: #555;
     color: #fff;
     text-align: center;
-    padding: 5px 10px;
+    padding: 8px 12px;
     border-radius: 6px;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 0.3s;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    z-index: 1000;
+    margin-bottom: 8px;
+    border: 1px solid #4CAF50;
 }
 
-.tooltip:hover::after {
-    opacity: 1;
+.tooltip:hover::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #555;
+    margin-bottom: 3px;
 }
 
-.accordion-header {
-    background-color: #4caf50;
-    color: #ffffff;
-    cursor: pointer;
-    width: 100%;
-    height: 15px;
-    border: none;
-    text-align: center;
-    outline: none;
-    transition: 0.4s;
+/* Dark Output Container */
+.output-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-.accordion-content {
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #444;
-    margin-bottom: 5px;
-}
-
-.accordion-section {
-    margin-bottom: 5px;
-}
-
-.accordion-header.active + .accordion-content {
+.output-container label {
+    color: #fff;
     display: block;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.github-hyperlink {
-    color: #4caf50;
-    background-color: #66c0f4;
-    text-align: center;
-    font-size: 14px;
-    border-radius: 5px;
-    width: 50%;
-    padding: 5px;
-    margin-top: 5px auto;
-    margin-bottom: 5px auto;
-    margin-left: 5px;
-    margin-right: 5px;
+#output {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #4CAF50;
+    border-radius: 6px;
+    padding: 15px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    resize: both;
+    overflow: auto;
+    box-sizing: border-box;
+    flex: 1;
 }
 
-.steam-hyperlink {
-    color: #4caf50;
-    background-color: #4779a1;
-    text-align: center;
-    font-size: 14px;
-    border-radius: 5px;
-    width: 50%;
-    padding: 5px;
-    margin: 5px auto;
+#output:focus {
+    outline: none;
+    border-color: #3e8e41;
 }
 
-/* Container for links */
+/* Dark Links */
 .link-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 20px;
+    gap: 12px;
+}
+
+.github-hyperlink, .steam-hyperlink {
+    flex: 1;
+    text-align: center;
+    padding: 10px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.github-hyperlink {
+    background-color: #66c0f4;
+    color: #4CAF50;
+}
+
+.steam-hyperlink {
+    background-color: #4779a1;
+    color: #4CAF50;
+}
+
+.github-hyperlink:hover, .steam-hyperlink:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.github-hyperlink::before, .steam-hyperlink::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.github-hyperlink:hover::before, .steam-hyperlink:hover::before {
+    left: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .form-container, .output-container {
+        max-width: 100%;
+    }
+    
+    #output {
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .form-container, .output-container {
+        padding: 20px;
+    }
+    
+    #output {
+        height: 400px;
+    }
+    
+    .link-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .form-container, .output-container {
+        padding: 15px;
+    }
+    
+    .config-selector-container {
+        padding: 15px;
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #2a2a2a;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #4CAF50;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #3e8e41;
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Focus States for Accessibility */
+*:focus {
+    outline: 2px solid #4CAF50;
+    outline-offset: 2px;
+}
+
+/* Selection Styling */
+::selection {
+    background-color: rgba(76, 175, 80, 0.3);
+    color: #fff;
 }
 

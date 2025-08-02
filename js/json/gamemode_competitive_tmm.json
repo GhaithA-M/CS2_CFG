@@ -1,10 +1,10 @@
-var cvarsData = [
+var cvarsData_competitive_tmm = [
     {
         normalName: 'Sv Qmm Abort Match Missing Player',
         cvarName: 'sv_qmm_abort_match_missing_player',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },
@@ -13,7 +13,7 @@ var cvarsData = [
         cvarName: 'mp_freezetime',
         defaultValue: '20',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -22,7 +22,7 @@ var cvarsData = [
         cvarName: 'sv_vote_command_delay',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'talk',
         enableTooltip: false,
         description: ''
     },
@@ -31,7 +31,7 @@ var cvarsData = [
         cvarName: 'mp_overtime_enable',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -40,7 +40,7 @@ var cvarsData = [
         cvarName: 'mp_overtime_limit',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -49,7 +49,7 @@ var cvarsData = [
         cvarName: 'mp_team_timeout_time',
         defaultValue: '31',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -58,7 +58,7 @@ var cvarsData = [
         cvarName: 'mp_team_timeout_max',
         defaultValue: '3',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -67,7 +67,7 @@ var cvarsData = [
         cvarName: 'mp_team_timeout_ot_add_once',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -76,7 +76,7 @@ var cvarsData = [
         cvarName: 'mp_team_timeout_ot_add_each',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -85,7 +85,7 @@ var cvarsData = [
         cvarName: 'mp_team_timeout_ot_max',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -94,7 +94,7 @@ var cvarsData = [
         cvarName: 'sv_holiday_mode',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },
@@ -103,7 +103,7 @@ var cvarsData = [
         cvarName: 'mp_promoted_item_enabled',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },

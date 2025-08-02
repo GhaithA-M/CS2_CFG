@@ -1,6 +1,7 @@
 # CS2_CFG
-A web app for CS2 server operators, it reformats your .cfg and retains comments into a custom **server.cfg**.
+A web app for CS2 server operators, used to create / customize configuration files with a GUI.
 
+Has the ability to reformat your existing .cfg and retain it's comments and values into a custom **server.cfg**.
 
 For creating your own **custom.json**, I've provided a python script.
 The cvars are derived from the default **gamemode_casual.cfg** configuration file that runs on fresh official CS2 casual servers.

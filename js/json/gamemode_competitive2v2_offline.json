@@ -1,10 +1,10 @@
-var cvarsData = [
+var cvarsData_competitive2v2_offline = [
     {
         normalName: 'Bot Quota',
         cvarName: 'bot_quota',
         defaultValue: '4',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -13,7 +13,7 @@ var cvarsData = [
         cvarName: 'bot_quota_mode',
         defaultValue: 'fill',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },

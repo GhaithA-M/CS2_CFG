@@ -1,10 +1,10 @@
-var cvarsData = [
+var cvarsData_cooperative = [
     {
         normalName: 'Bot Custom Strat',
         cvarName: 'bot_custom_strat',
         defaultValue: '""',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -13,7 +13,7 @@ var cvarsData = [
         cvarName: 'bot_quota_mode',
         defaultValue: 'fill',
         comment: 'match',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -22,7 +22,7 @@ var cvarsData = [
         cvarName: 'mp_warmuptime',
         defaultValue: '120',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -31,7 +31,7 @@ var cvarsData = [
         cvarName: 'mp_warmuptime_all_players_connected',
         defaultValue: '6',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -40,7 +40,7 @@ var cvarsData = [
         cvarName: 'mp_maxrounds',
         defaultValue: '15',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -49,7 +49,7 @@ var cvarsData = [
         cvarName: 'bot_allow_rogues',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -58,7 +58,7 @@ var cvarsData = [
         cvarName: 'bot_difficulty',
         defaultValue: '3',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -67,7 +67,7 @@ var cvarsData = [
         cvarName: 'mp_limitteams',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -76,7 +76,7 @@ var cvarsData = [
         cvarName: 'mp_autoteambalance',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -85,7 +85,7 @@ var cvarsData = [
         cvarName: 'mp_hostages_max',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -94,7 +94,7 @@ var cvarsData = [
         cvarName: 'mp_hostages_spawn_same_every_round',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -103,7 +103,7 @@ var cvarsData = [
         cvarName: 'sv_bots_force_rebuy_every_round',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -112,7 +112,7 @@ var cvarsData = [
         cvarName: 'bot_defer_to_human_goals',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -121,7 +121,7 @@ var cvarsData = [
         cvarName: 'cash_team_bonus_shorthanded',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'cash',
         enableTooltip: false,
         description: ''
     },
@@ -130,7 +130,7 @@ var cvarsData = [
         cvarName: 'ff_damage_reduction_bullets',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'ff',
         enableTooltip: false,
         description: ''
     },
@@ -139,7 +139,7 @@ var cvarsData = [
         cvarName: 'ff_damage_reduction_grenade',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'ff',
         enableTooltip: false,
         description: ''
     },
@@ -148,7 +148,7 @@ var cvarsData = [
         cvarName: 'ff_damage_reduction_grenade_self',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'ff',
         enableTooltip: false,
         description: ''
     },
@@ -157,7 +157,7 @@ var cvarsData = [
         cvarName: 'ff_damage_reduction_other',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'ff',
         enableTooltip: false,
         description: ''
     },
@@ -166,7 +166,7 @@ var cvarsData = [
         cvarName: 'mp_death_drop_defuser',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -175,7 +175,7 @@ var cvarsData = [
         cvarName: 'mp_death_drop_grenade',
         defaultValue: '2',
         comment: '0=none, 1=best, 2=current or best',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -184,7 +184,7 @@ var cvarsData = [
         cvarName: 'mp_death_drop_gun',
         defaultValue: '1',
         comment: '0=none, 1=best, 2=current or best',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -193,7 +193,7 @@ var cvarsData = [
         cvarName: 'mp_defuser_allocation',
         defaultValue: '0',
         comment: '0=none, 1=random, 2=everyone',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -202,7 +202,7 @@ var cvarsData = [
         cvarName: 'mp_friendlyfire',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'ff',
         enableTooltip: false,
         description: ''
     },
@@ -211,7 +211,7 @@ var cvarsData = [
         cvarName: 'mp_maxmoney',
         defaultValue: '10000',
         comment: '',
-        category: 'custom',
+        category: 'cash',
         enableTooltip: false,
         description: ''
     },
@@ -220,7 +220,7 @@ var cvarsData = [
         cvarName: 'mp_solid_teammates',
         defaultValue: '2',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -229,7 +229,7 @@ var cvarsData = [
         cvarName: 'sv_allow_votes',
         defaultValue: '1',
         comment: 'Voting allowed in this mode',
-        category: 'custom',
+        category: 'talk',
         enableTooltip: false,
         description: ''
     },
@@ -238,7 +238,7 @@ var cvarsData = [
         cvarName: 'sv_deadtalk',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'talk',
         enableTooltip: false,
         description: ''
     },
@@ -247,7 +247,7 @@ var cvarsData = [
         cvarName: 'mp_display_kill_assists',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -256,7 +256,7 @@ var cvarsData = [
         cvarName: 'mp_halftime',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -265,7 +265,7 @@ var cvarsData = [
         cvarName: 'mp_match_can_clinch',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -274,7 +274,7 @@ var cvarsData = [
         cvarName: 'mp_weapons_allow_typecount',
         defaultValue: '-1',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -283,7 +283,7 @@ var cvarsData = [
         cvarName: 'sv_duplicate_playernames_ok',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },
@@ -292,7 +292,7 @@ var cvarsData = [
         cvarName: 'mp_items_prohibited',
         defaultValue: '""',
         comment: 'don't restrict experimental weapons',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -301,7 +301,7 @@ var cvarsData = [
         cvarName: 'mp_heavyassaultsuit_cooldown',
         defaultValue: '0',
         comment: 'no cooldown on buying heavy armor',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -310,7 +310,7 @@ var cvarsData = [
         cvarName: 'sv_health_approach_enabled',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },
@@ -319,7 +319,7 @@ var cvarsData = [
         cvarName: 'healthshot_healthboost_time',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -337,7 +337,7 @@ var cvarsData = [
         cvarName: 'sv_health_approach_speed',
         defaultValue: '20',
         comment: '',
-        category: 'custom',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },
@@ -346,7 +346,7 @@ var cvarsData = [
         cvarName: 'sv_guardian_starting_equipment_humans',
         defaultValue: '"weapon_healthshot"',
         comment: '',
-        category: 'custom',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },
@@ -355,7 +355,7 @@ var cvarsData = [
         cvarName: 'sv_gameinstructor_enable',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },

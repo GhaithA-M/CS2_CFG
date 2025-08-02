@@ -1,10 +1,10 @@
-var cvarsData = [
+var cvarsData_deathmatch_tmm = [
     {
         normalName: 'Mp Dm Teammode',
         cvarName: 'mp_dm_teammode',
         defaultValue: '2',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -13,7 +13,7 @@ var cvarsData = [
         cvarName: 'mp_dm_teammode_kill_score',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -22,7 +22,7 @@ var cvarsData = [
         cvarName: 'mp_dm_teammode_bonus_score',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -31,7 +31,7 @@ var cvarsData = [
         cvarName: 'mp_solid_teammates',
         defaultValue: '2',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -40,7 +40,7 @@ var cvarsData = [
         cvarName: 'mp_fraglimit',
         defaultValue: '100',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -49,7 +49,7 @@ var cvarsData = [
         cvarName: 'sv_talk_enemy_living',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'talk',
         enableTooltip: false,
         description: ''
     },
@@ -58,7 +58,7 @@ var cvarsData = [
         cvarName: 'sv_talk_enemy_dead',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'talk',
         enableTooltip: false,
         description: ''
     },
@@ -67,7 +67,7 @@ var cvarsData = [
         cvarName: 'sv_deadtalk',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'talk',
         enableTooltip: false,
         description: ''
     },
@@ -76,7 +76,7 @@ var cvarsData = [
         cvarName: 'mp_warmuptime',
         defaultValue: '65',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -85,7 +85,7 @@ var cvarsData = [
         cvarName: 'sv_gameinstructor_enable',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },

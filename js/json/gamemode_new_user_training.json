@@ -1,4 +1,4 @@
-var cvarsData = [
+var cvarsData_new_user_training = [
     {
         normalName: 'Exec',
         cvarName: 'exec',
@@ -13,7 +13,7 @@ var cvarsData = [
         cvarName: 'mp_maxrounds',
         defaultValue: '12',
         comment: '',
-        category: 'custom',
+        category: 'time',
         enableTooltip: false,
         description: ''
     },
@@ -22,7 +22,7 @@ var cvarsData = [
         cvarName: 'bot_difficulty',
         defaultValue: '4',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -31,7 +31,7 @@ var cvarsData = [
         cvarName: 'custom_bot_difficulty',
         defaultValue: '4',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -40,7 +40,7 @@ var cvarsData = [
         cvarName: 'bot_quota',
         defaultValue: '10',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -49,7 +49,7 @@ var cvarsData = [
         cvarName: 'bot_quota_mode',
         defaultValue: 'fill',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -58,7 +58,7 @@ var cvarsData = [
         cvarName: 'sv_disable_teamselect_menu',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },
@@ -67,7 +67,7 @@ var cvarsData = [
         cvarName: 'sv_human_autojoin_team',
         defaultValue: '2',
         comment: '',
-        category: 'custom',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },
@@ -76,7 +76,7 @@ var cvarsData = [
         cvarName: 'mp_match_can_clinch',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'mp',
         enableTooltip: false,
         description: ''
     },
@@ -85,7 +85,7 @@ var cvarsData = [
         cvarName: 'sv_gameinstructor_enable',
         defaultValue: '1',
         comment: '',
-        category: 'custom',
+        category: 'misc',
         enableTooltip: false,
         description: ''
     },
@@ -94,7 +94,7 @@ var cvarsData = [
         cvarName: 'bot_allow_rifles',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -103,7 +103,7 @@ var cvarsData = [
         cvarName: 'bot_allow_snipers',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -112,7 +112,7 @@ var cvarsData = [
         cvarName: 'bot_allow_machine_guns',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -121,7 +121,7 @@ var cvarsData = [
         cvarName: 'bot_allow_shotguns',
         defaultValue: '0',
         comment: '',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
@@ -130,7 +130,7 @@ var cvarsData = [
         cvarName: 'mp_bot_ai_bt',
         defaultValue: '"scripts/ai/practice/newplayer_dust2_01.kv3"',
         comment: 'Dust II Only',
-        category: 'custom',
+        category: 'bot',
         enableTooltip: false,
         description: ''
     },
