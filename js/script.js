@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Global variable to store current cvars data
     let cvarsData = [];
     let allConfigs = {}; // Store all config files in memory
+    let allCommands = []; // Store ALL commands from ALL configs (no duplicates)
 
     /* 3. Function to load all config files at once */
     async function loadAllConfigs() {
@@ -102,13 +103,49 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('=====================================');
         console.log('');
         
-        // Start with custom.json if available, otherwise use the first available config
-        if (allConfigs['custom.json']) {
-            switchToConfig('custom.json');
-        } else if (Object.keys(allConfigs).length > 0) {
-            const firstConfig = Object.keys(allConfigs)[0];
-            switchToConfig(firstConfig);
+        // Build the allCommands array with all unique commands from all configs
+        buildAllCommands();
+    }
+    
+    /* 3.1 Function to build allCommands array with unique commands from all configs */
+    function buildAllCommands() {
+        const commandMap = new Map(); // Use Map to track unique commands by cvarName
+        
+        // Iterate through all loaded configs
+        for (const [configName, configCommands] of Object.entries(allConfigs)) {
+            if (Array.isArray(configCommands)) {
+                configCommands.forEach(command => {
+                    // Use cvarName as the unique key
+                    if (!commandMap.has(command.cvarName)) {
+                        commandMap.set(command.cvarName, command);
+                    } else {
+                        // If command already exists, merge comments and keep the most complete version
+                        const existing = commandMap.get(command.cvarName);
+                        const merged = {
+                            ...existing,
+                            comment: existing.comment || command.comment,
+                            defaultValue: existing.defaultValue || command.defaultValue,
+                            normalName: existing.normalName || command.normalName
+                        };
+                        commandMap.set(command.cvarName, merged);
+                    }
+                });
+            }
         }
+        
+        // Convert Map back to array
+        allCommands = Array.from(commandMap.values());
+        
+        console.log(`📋 Built allCommands array with ${allCommands.length} unique commands from all configs`);
+        
+        // Set cvarsData to allCommands so all commands are always shown
+        cvarsData = [...allCommands];
+        
+        // Create form inputs for all commands
+        createAllFormInputs();
+        
+        // Update output
+        updateOutput();
     }
 
     /* 4. Function to switch between loaded configs */
@@ -156,6 +193,42 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    /* 4.6 Function to load config values into existing form inputs without changing displayed commands */
+    function loadConfigValues(filename) {
+        if (!allConfigs[filename]) {
+            console.error(`Config ${filename} not found in loaded configs`);
+            return;
+        }
+
+        const configCommands = allConfigs[filename];
+        console.log(`Loading values from ${filename} with ${configCommands.length} commands`);
+
+        // Create a map of command names to their values for quick lookup
+        const commandValueMap = new Map();
+        configCommands.forEach(command => {
+            commandValueMap.set(command.cvarName, command.defaultValue);
+        });
+
+        // Update all form inputs with values from the selected config
+        const allInputs = document.querySelectorAll('input[type="text"]');
+        allInputs.forEach(input => {
+            const commandName = input.name;
+            if (commandValueMap.has(commandName)) {
+                const newValue = commandValueMap.get(commandName);
+                input.value = newValue;
+                
+                // Update localStorage with the new value
+                const storageKey = `${filename}_${commandName}`;
+                localStorage.setItem(storageKey, newValue);
+            }
+        });
+
+        // Update the output to reflect the new values
+        updateOutput();
+        
+        console.log(`Loaded values from ${filename} into all form inputs`);
+    }
+
     /* 4. Function to clear all form inputs */
     function clearAllForms() {
         const categories = ['gen', 'bhop', 'time', 'bot', 'cash', 'ff', 'mp', 'talk', 'ammo', 'ds', 'misc', 'custom'];
@@ -191,105 +264,471 @@ document.addEventListener('DOMContentLoaded', function() {
 
         /* 3.3 Loop through each cvar in the category */
         cvars.forEach(cvar => {
-            /* 3.3.1 Create a container for each cvar input */
-            var div = document.createElement('div');
-            div.className = 'form-group flex items-center space-x-3 p-3 bg-cs-gray rounded-md hover:bg-cs-gray/80 transition-colors';
+                    /* 3.3.1 Create a container for each cvar input */
+        var div = document.createElement('div');
+        div.className = 'form-group';
 
-            /* 3.3.2 Create and set up the label for the input field */
-            var label = document.createElement('label');
-            label.htmlFor = cvar.cvarName;
-            label.textContent = cvar.cvarName + ':';
-            label.className = 'text-sm font-mono text-white min-w-0 flex-1';
-            div.appendChild(label);
+        /* 3.3.2 Create and set up the label for the input field */
+        var label = document.createElement('label');
+        label.htmlFor = cvar.cvarName;
+        label.textContent = cvar.cvarName + ':';
+        label.setAttribute('data-full-command', cvar.cvarName);
+        label.className = 'command-label';
+        div.appendChild(label);
 
-            /* 3.3.3 Create and set up the input field */
-            var input = document.createElement('input');
-            input.type = 'text';
-            input.id = cvar.cvarName;
-            input.name = cvar.cvarName;
-            input.className = 'bg-cs-light-gray border border-gray-600 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-cs-green focus:ring-1 focus:ring-cs-green/20 transition-colors w-32';
-            
-            // Get the current config filename for localStorage key
-            const currentConfig = configSelector.value;
-            const storageKey = `${currentConfig}_${cvar.cvarName}`;
-            
-            // Use stored value if it exists and is different from default, otherwise use default
-            const storedValue = localStorage.getItem(storageKey);
-            input.value = (storedValue && storedValue !== cvar.defaultValue) ? storedValue : cvar.defaultValue;
-            
-            /* 3.3.4 Attach an event listener to update the output when the input changes */
-            input.addEventListener('input', function() {
-                localStorage.setItem(storageKey, input.value);
-                updateOutput();
-            });
-            div.appendChild(input);
+        /* 3.3.3 Create and set up the input field */
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.id = cvar.cvarName;
+        input.name = cvar.cvarName;
+        
+        // Get the current config filename for localStorage key
+        const currentConfig = configSelector.value;
+        const storageKey = `${currentConfig}_${cvar.cvarName}`;
+        
+        // Use stored value if it exists and is different from default, otherwise use default
+        const storedValue = localStorage.getItem(storageKey);
+        input.value = (storedValue && storedValue !== cvar.defaultValue) ? storedValue : cvar.defaultValue;
+        input.placeholder = cvar.defaultValue || '';
+        
+        /* 3.3.4 Attach an event listener to update the output when the input changes */
+        input.addEventListener('input', function() {
+            localStorage.setItem(storageKey, input.value);
+            updateOutput();
+        });
+        div.appendChild(input);
 
-            /* 3.3.5 Create a tooltip with command description */
-            var tooltip = document.createElement('button');
-            tooltip.className = 'tooltip p-1.5 rounded-md hover:bg-cs-light-gray transition-colors text-gray-400 hover:text-cs-green flex-shrink-0';
-            tooltip.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-            tooltip.setAttribute('title', getCommandDescription(cvar.cvarName));
-            div.appendChild(tooltip);
+        /* 3.3.5 Create a tooltip with command description */
+        var tooltip = document.createElement('span');
+        tooltip.className = 'tooltip';
+        tooltip.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+        tooltip.setAttribute('data-tooltip', getCommandDescription(cvar.cvarName));
+        
+        // Add tooltip positioning and behavior
+        tooltip.addEventListener('mouseenter', function(e) {
+            const tooltipText = this.getAttribute('data-tooltip');
+            const rect = this.getBoundingClientRect();
+            const tooltipElement = document.createElement('div');
+            tooltipElement.className = 'dynamic-tooltip';
+            tooltipElement.textContent = tooltipText;
+            tooltipElement.style.cssText = `
+                position: fixed;
+                left: ${rect.left + rect.width / 2}px;
+                top: ${rect.top - 10}px;
+                transform: translateX(-50%) translateY(-100%);
+                background-color: #222;
+                color: #fff;
+                text-align: left;
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-size: 0.75rem;
+                white-space: pre-line;
+                max-width: 300px;
+                z-index: 99999;
+                border: 1px solid #4CAF50;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+                line-height: 1.4;
+                font-family: 'JetBrains Mono', monospace;
+                pointer-events: none;
+            `;
+            document.body.appendChild(tooltipElement);
+            this.tooltipElement = tooltipElement;
+        });
+        
+        tooltip.addEventListener('mouseleave', function() {
+            if (this.tooltipElement) {
+                this.tooltipElement.remove();
+                this.tooltipElement = null;
+            }
+        });
+        
+        div.appendChild(tooltip);
 
             /* 3.3.6 Append the entire cvar input container to the form */
             form.appendChild(div);
         });
     }
 
-    /* 6.5 Function to get command descriptions from Valve wiki */
+    /* 6.5 Function to get command descriptions with min/max values and command names */
     function getCommandDescription(commandName) {
-        const descriptions = {
+        const commandInfo = {
             // General Commands
-            'hostname': 'Sets the server hostname that appears in the server browser',
-            'sv_password': 'Sets a password required to join the server',
-            'sv_region': 'Sets the server region (0=US East, 1=US West, 2=South America, 3=Europe, 4=Asia, 5=Australia, 6=Middle East, 7=Africa)',
-            'sv_lan': 'Enables LAN mode (0=Internet, 1=LAN only)',
-            'sv_cheats': 'Enables cheats on the server (0=disabled, 1=enabled)',
-            'sv_pure': 'Enables pure server mode (0=disabled, 1=enabled)',
-            'sv_pure_kick_clients': 'Kicks clients that don\'t match pure server requirements',
+            'hostname': {
+                description: 'Sets the server hostname that appears in the server browser',
+                min: '1',
+                max: '64',
+                type: 'string'
+            },
+            'sv_password': {
+                description: 'Sets a password required to join the server',
+                min: '0',
+                max: '32',
+                type: 'string'
+            },
+            'sv_region': {
+                description: 'Sets the server region',
+                min: '0',
+                max: '7',
+                type: 'integer',
+                values: '0=US East, 1=US West, 2=South America, 3=Europe, 4=Asia, 5=Australia, 6=Middle East, 7=Africa'
+            },
+            'sv_lan': {
+                description: 'Enables LAN mode',
+                min: '0',
+                max: '1',
+                type: 'boolean',
+                values: '0=Internet, 1=LAN only'
+            },
+            'sv_cheats': {
+                description: 'Enables cheats on the server',
+                min: '0',
+                max: '1',
+                type: 'boolean',
+                values: '0=disabled, 1=enabled'
+            },
+            'sv_pure': {
+                description: 'Enables pure server mode',
+                min: '0',
+                max: '1',
+                type: 'boolean',
+                values: '0=disabled, 1=enabled'
+            },
+            'sv_pure_kick_clients': {
+                description: 'Kicks clients that don\'t match pure server requirements',
+                min: '0',
+                max: '1',
+                type: 'boolean',
+                values: '0=disabled, 1=enabled'
+            },
             
             // Bot Commands
-            'bot_quota': 'Sets the number of bots to maintain on the server',
-            'bot_quota_mode': 'Sets bot quota mode (fill=fill empty slots, match=maintain ratio)',
-            'bot_difficulty': 'Sets bot difficulty (0=easy, 1=normal, 2=hard, 3=expert)',
-            'bot_join_team': 'Sets which team bots join (any, t, ct)',
-            'bot_join_after_player': 'Bots join after a player joins (0=disabled, 1=enabled)',
-            'bot_defer_to_human_goals': 'Bots defer to human goals (0=disabled, 1=enabled)',
-            'bot_defer_to_human_items': 'Bots defer to human items (0=disabled, 1=enabled)',
-            'bot_autodifficulty_threshold_high': 'Threshold above which bots lower difficulty',
-            'bot_autodifficulty_threshold_low': 'Threshold below which bots raise difficulty',
-            'bot_chatter': 'Sets bot chatter mode (off, minimal, radio, normal)',
+            'bot_quota': {
+                description: 'Sets the number of bots to maintain on the server',
+                min: '0',
+                max: '32',
+                type: 'integer'
+            },
+            'bot_quota_mode': {
+                description: 'Sets bot quota mode',
+                min: '0',
+                max: '0',
+                type: 'string',
+                values: 'fill=fill empty slots, match=maintain ratio, competitive'
+            },
+            'bot_difficulty': {
+                description: 'Sets bot difficulty',
+                min: '0',
+                max: '3',
+                type: 'integer',
+                values: '0=easy, 1=normal, 2=hard, 3=expert'
+            },
+            'bot_join_team': {
+                description: 'Sets which team bots join',
+                min: '0',
+                max: '0',
+                type: 'string',
+                values: 'any, t, ct'
+            },
+            'bot_join_after_player': {
+                description: 'Bots join after a player joins',
+                min: '0',
+                max: '1',
+                type: 'boolean',
+                values: '0=disabled, 1=enabled'
+            },
+            'bot_defer_to_human_goals': {
+                description: 'Bots defer to human goals',
+                min: '0',
+                max: '1',
+                type: 'boolean',
+                values: '0=disabled, 1=enabled'
+            },
+            'bot_defer_to_human_items': {
+                description: 'Bots defer to human items',
+                min: '0',
+                max: '1',
+                type: 'boolean',
+                values: '0=disabled, 1=enabled'
+            },
+            'bot_autodifficulty_threshold_high': {
+                description: 'Threshold above which bots lower difficulty',
+                min: '-20.0',
+                max: '20.0',
+                type: 'float'
+            },
+            'bot_autodifficulty_threshold_low': {
+                description: 'Threshold below which bots raise difficulty',
+                min: '-20.0',
+                max: '20.0',
+                type: 'float'
+            },
+            'bot_chatter': {
+                description: 'Sets bot chatter mode',
+                min: '0',
+                max: '0',
+                type: 'string',
+                values: 'off, minimal, radio, normal'
+            },
             
             // Cash/Economy Commands
-            'cash_player_bomb_defused': 'Cash reward for defusing the bomb',
-            'cash_player_bomb_planted': 'Cash reward for planting the bomb',
-            'cash_player_killed_enemy_default': 'Default cash reward for killing an enemy',
-            'cash_player_killed_enemy_factor': 'Multiplier for cash rewards',
-            'cash_player_killed_teammate': 'Cash penalty for killing a teammate',
-            'cash_player_rescued_hostage': 'Cash reward for rescuing a hostage',
-            'cash_team_elimination_bomb_map': 'Team cash reward for elimination on bomb maps',
-            'cash_team_elimination_hostage_map_t': 'T team cash reward for elimination on hostage maps',
-            'cash_team_elimination_hostage_map_ct': 'CT team cash reward for elimination on hostage maps',
-            'cash_team_loser_bonus': 'Cash bonus for losing team',
-            'cash_team_loser_bonus_consecutive_rounds': 'Additional cash for consecutive losses',
-            'cash_team_planted_bomb_but_defused': 'Cash reward for planting bomb but it gets defused',
-            'cash_team_rescued_hostage': 'Team cash reward for hostage rescue',
-            'cash_team_terrorist_win_bomb': 'T team cash reward for bomb explosion',
-            'cash_team_win_by_defusing_bomb': 'CT team cash reward for defusing bomb',
-            'cash_team_win_by_hostage_rescue': 'CT team cash reward for hostage rescue',
-            'cash_team_win_by_time_running_out_hostage': 'CT team cash reward for time running out on hostage maps',
-            'cash_team_win_by_time_running_out_bomb': 'CT team cash reward for time running out on bomb maps',
-            'mp_starting_losses': 'Number of consecutive losses to start with',
-            'mp_afterroundmoney': 'Money given after each round',
-            'mp_startmoney': 'Starting money for each player',
-            'mp_maxmoney': 'Maximum money a player can have',
+            'cash_player_bomb_defused': {
+                description: 'Cash reward for defusing the bomb',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_player_bomb_planted': {
+                description: 'Cash reward for planting the bomb',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_player_killed_enemy_default': {
+                description: 'Default cash reward for killing an enemy',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_player_killed_enemy_factor': {
+                description: 'Multiplier for cash rewards',
+                min: '0',
+                max: '10',
+                type: 'float'
+            },
+            'cash_player_killed_teammate': {
+                description: 'Cash penalty for killing a teammate',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_player_rescued_hostage': {
+                description: 'Cash reward for rescuing a hostage',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_team_elimination_bomb_map': {
+                description: 'Team cash reward for elimination on bomb maps',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_team_elimination_hostage_map_t': {
+                description: 'T team cash reward for elimination on hostage maps',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_team_elimination_hostage_map_ct': {
+                description: 'CT team cash reward for elimination on hostage maps',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_team_loser_bonus': {
+                description: 'Cash bonus for losing team',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_team_loser_bonus_consecutive_rounds': {
+                description: 'Additional cash for consecutive losses',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_team_planted_bomb_but_defused': {
+                description: 'Cash reward for planting bomb but it gets defused',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_team_rescued_hostage': {
+                description: 'Team cash reward for hostage rescue',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_team_terrorist_win_bomb': {
+                description: 'T team cash reward for bomb explosion',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_team_win_by_defusing_bomb': {
+                description: 'CT team cash reward for defusing bomb',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_team_win_by_hostage_rescue': {
+                description: 'CT team cash reward for hostage rescue',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_team_win_by_time_running_out_hostage': {
+                description: 'CT team cash reward for time running out on hostage maps',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'cash_team_win_by_time_running_out_bomb': {
+                description: 'CT team cash reward for time running out on bomb maps',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'mp_starting_losses': {
+                description: 'Number of consecutive losses to start with',
+                min: '0',
+                max: '10',
+                type: 'integer'
+            },
+            'mp_afterroundmoney': {
+                description: 'Money given after each round',
+                min: '-16000',
+                max: '16000',
+                type: 'integer'
+            },
+            'mp_startmoney': {
+                description: 'Starting money for each player',
+                min: '0',
+                max: '16000',
+                type: 'integer'
+            },
+            'mp_maxmoney': {
+                description: 'Maximum money a player can have',
+                min: '0',
+                max: '16000',
+                type: 'integer'
+            },
             
             // Friendly Fire Commands
-            'ff_damage_reduction_bullets': 'Damage reduction for friendly fire bullets',
-            'ff_damage_reduction_grenade': 'Damage reduction for friendly fire grenades',
-            'ff_damage_reduction_grenade_self': 'Damage reduction for self-inflicted grenade damage',
-            'ff_damage_reduction_other': 'Damage reduction for other friendly fire sources',
-            'mp_friendlyfire': 'Enables friendly fire (0=disabled, 1=enabled)',
+            'ff_damage_reduction_bullets': {
+                description: 'Damage reduction for friendly fire bullets',
+                min: '0.0',
+                max: '1.0',
+                type: 'float'
+            },
+            'ff_damage_reduction_grenade': {
+                description: 'Damage reduction for friendly fire grenades',
+                min: '0.0',
+                max: '1.0',
+                type: 'float'
+            },
+            'ff_damage_reduction_grenade_self': {
+                description: 'Damage reduction for self-inflicted grenade damage',
+                min: '0.0',
+                max: '1.0',
+                type: 'float'
+            },
+            'ff_damage_reduction_other': {
+                description: 'Damage reduction for other friendly fire sources',
+                min: '0.0',
+                max: '1.0',
+                type: 'float'
+            },
+            'mp_friendlyfire': {
+                description: 'Enables friendly fire',
+                min: '0',
+                max: '1',
+                type: 'boolean',
+                values: '0=disabled, 1=enabled'
+            },
+            
+            // Surfing & Bunnyhopping Commands
+            'sv_airaccelerate': {
+                description: 'Air acceleration multiplier (higher = faster air movement)',
+                min: '0',
+                max: '10000',
+                type: 'float'
+            },
+            'sv_air_max_wishspeed': {
+                description: 'Maximum air speed players can achieve',
+                min: '0',
+                max: '1000',
+                type: 'float'
+            },
+            'sv_staminajumpcost': {
+                description: 'Stamina cost for jumping (0 = no cost)',
+                min: '0.0',
+                max: '1.0',
+                type: 'float'
+            },
+            'sv_staminalandcost': {
+                description: 'Stamina cost for landing (0 = no cost)',
+                min: '0.0',
+                max: '1.0',
+                type: 'float'
+            },
+            'sv_staminamax': {
+                description: 'Maximum stamina value',
+                min: '0.0',
+                max: '1000.0',
+                type: 'float'
+            },
+            'sv_staminarecoveryrate': {
+                description: 'How fast stamina recovers per second',
+                min: '0.0',
+                max: '1000.0',
+                type: 'float'
+            },
+            'sv_wateraccelerate': {
+                description: 'Water acceleration multiplier',
+                min: '0',
+                max: '1000',
+                type: 'float'
+            },
+            'sv_waterdist': {
+                description: 'Distance from water surface for water effects',
+                min: '0',
+                max: '100',
+                type: 'float'
+            },
+            'sv_waterjump': {
+                description: 'Enable/disable water jumping',
+                min: '0',
+                max: '1',
+                type: 'boolean',
+                values: '0=disabled, 1=enabled'
+            },
+            'sv_waterwishspeed': {
+                description: 'Maximum speed in water',
+                min: '0',
+                max: '1000',
+                type: 'float'
+            },
+            'sv_gravity': {
+                description: 'World gravity (lower = higher jumps)',
+                min: '0',
+                max: '1000',
+                type: 'float'
+            },
+            'sv_maxspeed': {
+                description: 'Maximum player movement speed',
+                min: '0',
+                max: '1000',
+                type: 'float'
+            },
+            'sv_friction': {
+                description: 'Ground friction (higher = more friction)',
+                min: '0',
+                max: '100',
+                type: 'float'
+            },
+            'sv_accelerate': {
+                description: 'Ground acceleration multiplier',
+                min: '0',
+                max: '100',
+                type: 'float'
+            },
+            'sv_stopspeed': {
+                description: 'Speed threshold for stopping',
+                min: '0',
+                max: '1000',
+                type: 'float'
+            },
             
             // Match Play Commands
             'mp_roundtime': 'Round time in minutes',
@@ -356,15 +795,60 @@ document.addEventListener('DOMContentLoaded', function() {
             'mp_randomspawn_los': 'Random spawn line of sight check (0=disabled, 1=enabled)',
             
             // Miscellaneous Commands
-            'tv_delay': 'TV delay in seconds',
-            'spec_freeze_time': 'Spectator freeze time in seconds',
-            'spec_freeze_panel_extended_time': 'Extended freeze panel time',
-            'cl_drawhud_force_radar': 'Force radar display (-1=auto, 0=disabled, 1=enabled)',
-            'exec': 'Execute a config file',
-            'hostname': 'Set server hostname'
+            'tv_delay': {
+                description: 'TV delay in seconds',
+                min: '0',
+                max: '300',
+                type: 'integer'
+            },
+            'spec_freeze_time': {
+                description: 'Spectator freeze time in seconds',
+                min: '0',
+                max: '10',
+                type: 'float'
+            },
+            'spec_freeze_panel_extended_time': {
+                description: 'Extended freeze panel time',
+                min: '0',
+                max: '10',
+                type: 'float'
+            },
+            'cl_drawhud_force_radar': {
+                description: 'Force radar display',
+                min: '-1',
+                max: '1',
+                type: 'integer',
+                values: '-1=auto, 0=disabled, 1=enabled'
+            },
+            'exec': {
+                description: 'Execute a config file',
+                min: '0',
+                max: '0',
+                type: 'string'
+            }
         };
         
-        return descriptions[commandName] || `Console command: ${commandName}`;
+        // Get command info
+        const info = commandInfo[commandName];
+        if (!info) {
+            return `Console command: ${commandName}`;
+        }
+        
+        // Build tooltip content
+        let tooltipText = `${commandName}\n\n${info.description}`;
+        
+        // Add min/max values if they exist
+        if (info.min !== '0' || info.max !== '0') {
+            if (info.type === 'boolean') {
+                tooltipText += `\n\nValues: ${info.values || '0=disabled, 1=enabled'}`;
+            } else if (info.values) {
+                tooltipText += `\n\nValues: ${info.values}`;
+            } else {
+                tooltipText += `\n\nRange: ${info.min} to ${info.max}`;
+            }
+        }
+        
+        return tooltipText;
     }
 
     /* 7. Function to handle the accordion functionality (show/hide sections) */
@@ -374,18 +858,14 @@ document.addEventListener('DOMContentLoaded', function() {
             button.addEventListener('click', () => {
                 /* 4.2 Get the content section related to the clicked header */
                 const accordionContent = button.nextElementSibling;
-                const arrow = button.querySelector('svg:last-child');
+                const arrow = button.querySelector('.accordion-arrow');
                 
                 /* 4.3 Toggle the active class to show/hide the content */
                 button.classList.toggle('active');
                 if (button.classList.contains('active')) {
-                    accordionContent.classList.remove('hidden');
-                    accordionContent.classList.add('block');
-                    if (arrow) arrow.style.transform = 'rotate(180deg)';
+                    accordionContent.style.display = 'block';
                 } else {
-                    accordionContent.classList.remove('block');
-                    accordionContent.classList.add('hidden');
-                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    accordionContent.style.display = 'none';
                 }
             });
         });
@@ -442,7 +922,7 @@ document.addEventListener('DOMContentLoaded', function() {
     /* 13. Add event listeners for config selector */
     loadConfigButton.addEventListener('click', function() {
         const selectedFile = configSelector.value;
-        switchToConfig(selectedFile);
+        loadConfigValues(selectedFile);
     });
 
     /* 14. Initialize by loading all configs */
@@ -452,7 +932,64 @@ document.addEventListener('DOMContentLoaded', function() {
     setupInteractiveFeatures();
 });
 
-/* 16. Function to setup all interactive features */
+/* 16. Function to filter commands based on search term */
+function filterCommands(searchTerm) {
+    const formGroups = document.querySelectorAll('.form-group');
+    let visibleCount = 0;
+    let categoryVisibility = {};
+    
+    formGroups.forEach(group => {
+        const label = group.querySelector('label');
+        const input = group.querySelector('input');
+        
+        if (label && input) {
+            const commandName = label.textContent.toLowerCase();
+            const commandValue = input.value.toLowerCase();
+            const cvarName = input.name.toLowerCase();
+            
+            // Check if search term matches command name, value, or cvar name
+            const matches = searchTerm === '' || 
+                           commandName.includes(searchTerm) || 
+                           commandValue.includes(searchTerm) || 
+                           cvarName.includes(searchTerm);
+            
+            if (matches) {
+                group.style.display = 'block';
+                visibleCount++;
+                
+                // Track which categories have visible commands
+                const category = group.closest('.accordion-content');
+                if (category) {
+                    const categoryId = category.querySelector('form').id;
+                    categoryVisibility[categoryId] = true;
+                }
+            } else {
+                group.style.display = 'none';
+            }
+        }
+    });
+    
+    // Show/hide accordion sections based on whether they have visible commands
+    const accordionSections = document.querySelectorAll('.accordion-section');
+    accordionSections.forEach(section => {
+        const content = section.querySelector('.accordion-content');
+        const form = content.querySelector('form');
+        const hasVisibleCommands = categoryVisibility[form.id] || searchTerm === '';
+        
+        if (hasVisibleCommands) {
+            section.style.display = 'block';
+        } else {
+            section.style.display = 'none';
+        }
+    });
+    
+    // Update status
+    if (searchTerm) {
+        showToast(`Found ${visibleCount} matching commands`, 'info');
+    }
+}
+
+/* 17. Function to setup all interactive features */
 function setupInteractiveFeatures() {
     // Copy to clipboard functionality
     const copyBtn = document.getElementById('copyBtn');
@@ -489,6 +1026,36 @@ function setupInteractiveFeatures() {
         });
     }
 
+    // Search functionality
+    const searchInput = document.getElementById('commandSearch');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            const clearBtn = document.getElementById('clearSearchBtn');
+            
+            // Show/hide clear button
+            if (searchTerm.length > 0) {
+                clearBtn.style.display = 'block';
+            } else {
+                clearBtn.style.display = 'none';
+            }
+            
+            // Filter commands
+            filterCommands(searchTerm);
+        });
+    }
+    
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', () => {
+            const searchInput = document.getElementById('commandSearch');
+            searchInput.value = '';
+            clearSearchBtn.style.display = 'none';
+            filterCommands('');
+        });
+    }
+
     // Expand/Collapse All functionality
     const expandAllBtn = document.getElementById('expandAllBtn');
     if (expandAllBtn) {
@@ -498,27 +1065,22 @@ function setupInteractiveFeatures() {
             
             accordionHeaders.forEach(header => {
                 const accordionContent = header.nextElementSibling;
-                const arrow = header.querySelector('svg:last-child');
                 
                 if (isAllExpanded) {
                     // Collapse all
                     header.classList.remove('active');
-                    accordionContent.classList.remove('block');
-                    accordionContent.classList.add('hidden');
-                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    accordionContent.style.display = 'none';
                 } else {
                     // Expand all
                     header.classList.add('active');
-                    accordionContent.classList.remove('hidden');
-                    accordionContent.classList.add('block');
-                    if (arrow) arrow.style.transform = 'rotate(180deg)';
+                    accordionContent.style.display = 'block';
                 }
             });
             
             // Update button text
             expandAllBtn.innerHTML = isAllExpanded ? 
-                '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg><span>Expand All</span>' :
-                '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg><span>Collapse All</span>';
+                '<svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg><span>Expand All</span>' :
+                '<svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg><span>Collapse All</span>';
         });
     }
 
@@ -528,7 +1090,7 @@ function setupInteractiveFeatures() {
     updateStatusBar();
 }
 
-/* 17. Function to show toast notifications */
+/* 18. Function to show toast notifications */
 function showToast(message, type = 'info') {
     // Remove existing toasts
     const existingToasts = document.querySelectorAll('.toast');
@@ -564,7 +1126,7 @@ function showToast(message, type = 'info') {
     }, 3000);
 }
 
-/* 18. Function to update status bar */
+/* 19. Function to update status bar */
 function updateStatusBar() {
     // Status bar removed, but keeping function for future use if needed
     console.log(`Current config loaded with ${cvarsData.length} commands`);

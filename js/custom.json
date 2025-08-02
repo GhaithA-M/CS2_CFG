@@ -29,6 +29,143 @@ var cvarsData_custom = [
             enableTooltip: false,
             description: ''
         },
+        
+        // Surfing & Bunnyhopping Commands
+        {
+            normalName: "Air Acceleration",
+            cvarName: "sv_airaccelerate",
+            defaultValue: "1000",
+            comment: "Air acceleration multiplier (higher = faster air movement)",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'Controls how quickly players can change direction while in the air. Higher values allow for faster air strafing and surfing.'
+        },
+        {
+            normalName: "Air Max Wish Speed",
+            cvarName: "sv_air_max_wishspeed",
+            defaultValue: "30",
+            comment: "Maximum air speed players can achieve",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'Maximum speed players can reach while in the air. Affects surfing and bunnyhopping speed limits.'
+        },
+        {
+            normalName: "Stamina Jump Cost",
+            cvarName: "sv_staminajumpcost",
+            defaultValue: "0.080",
+            comment: "Stamina cost for jumping (0 = no cost)",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'How much stamina is consumed when jumping. Set to 0 to disable stamina drain from jumping.'
+        },
+        {
+            normalName: "Stamina Land Cost",
+            cvarName: "sv_staminalandcost",
+            defaultValue: "0.050",
+            comment: "Stamina cost for landing (0 = no cost)",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'How much stamina is consumed when landing from a jump. Set to 0 to disable stamina drain from landing.'
+        },
+        {
+            normalName: "Stamina Max",
+            cvarName: "sv_staminamax",
+            defaultValue: "80.0",
+            comment: "Maximum stamina value",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'Maximum stamina a player can have. Higher values allow for more consecutive jumps.'
+        },
+        {
+            normalName: "Stamina Recovery Rate",
+            cvarName: "sv_staminarecoveryrate",
+            defaultValue: "60.0",
+            comment: "How fast stamina recovers per second",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'How quickly stamina regenerates. Higher values mean faster recovery between jumps.'
+        },
+        {
+            normalName: "Water Accelerate",
+            cvarName: "sv_wateraccelerate",
+            defaultValue: "10",
+            comment: "Water acceleration multiplier",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'How quickly players can accelerate while swimming in water.'
+        },
+        {
+            normalName: "Water Distance",
+            cvarName: "sv_waterdist",
+            defaultValue: "12",
+            comment: "Distance from water surface for water effects",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'Distance from water surface where water physics begin to take effect.'
+        },
+        {
+            normalName: "Water Jump",
+            cvarName: "sv_waterjump",
+            defaultValue: "1",
+            comment: "Enable/disable water jumping (0/1)",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'Whether players can jump while in water. Set to 0 to disable water jumping.'
+        },
+        {
+            normalName: "Water Wish Speed",
+            cvarName: "sv_waterwishspeed",
+            defaultValue: "15",
+            comment: "Maximum speed in water",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'Maximum speed players can achieve while swimming in water.'
+        },
+        {
+            normalName: "Gravity",
+            cvarName: "sv_gravity",
+            defaultValue: "800",
+            comment: "World gravity (lower = higher jumps)",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'World gravity setting. Lower values allow for higher jumps and easier bunnyhopping.'
+        },
+        {
+            normalName: "Max Speed",
+            cvarName: "sv_maxspeed",
+            defaultValue: "320",
+            comment: "Maximum player movement speed",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'Maximum speed players can move on the ground. Affects overall movement capabilities.'
+        },
+        {
+            normalName: "Friction",
+            cvarName: "sv_friction",
+            defaultValue: "4",
+            comment: "Ground friction (higher = more friction)",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'How much friction is applied when moving on the ground. Lower values allow for more sliding.'
+        },
+        {
+            normalName: "Accelerate",
+            cvarName: "sv_accelerate",
+            defaultValue: "5.5",
+            comment: "Ground acceleration multiplier",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'How quickly players can accelerate on the ground. Higher values allow for faster acceleration.'
+        },
+        {
+            normalName: "Stop Speed",
+            cvarName: "sv_stopspeed",
+            defaultValue: "80",
+            comment: "Speed threshold for stopping",
+            category: "bhop",
+            enableTooltip: false,
+            description: 'Speed threshold below which players stop more quickly. Affects movement feel and control.'
+        }
     
         // Add more cvars here
 
