@@ -1,34 +1,20 @@
 # CS2_CFG
-A web app for CS2 server operators, it generates organized and commented **server.cfg** cvars.
+A web app for CS2 server operators, it reformats your .cfg and retains comments into a custom **server.cfg**.
 
 
 The cvars are derived from the default **gamemode_casual.cfg** configuration file that runs on fresh official CS2 casual servers.
-Included in the **python** folder is a simple script which automates the process of adapting the **gamemode_casual.cfg** file to the syntax format accepted by **cvars.js**.
+Included in the **python** folder is a simple script which automates the process of adapting any **gamemode_#.cfg** file to json.
 
 
 Input your cvar variable and copy / paste the output into your **server.cfg** file.
 
 ----------------------------------------------------------------------------------
-Custom **cvars.js**:
 
-For creating your own **cvars.js**, I've provided a python script.
+Custom **cvars.json**:
 
-The purpose of this script is to adapt your existing *.cfg file to be compatible with the "script.js" that reads the "cvars.js" file
+For creating your own **cvars.json**, I've provided a python script.
 
-1. Copy / paste the existing cvars in your *.cfg file to "gamemode_casual.cfg".
-
-2. Open **cmd.exe** in this folder (\CS2_CFG\python\cmd.exe)
-
-3. Copy this command and paste it into the cmd window:
-
-python commands.py gamemode_casual.cfg formatted_cvars.js
-
-Input file: **"gamemode_casual.cfg"**
-Output file: **"formatted_cvars.js"**
-
-4. Copy/paste the newly generated syntax-compatible cvars from your "formatted_cvars.js" to "cvars.js" to use them in a local version of this web-app
-
-Inside there's an example output, based on the provided **"gamemode_casual.cfg"** file.
+----------------------------------------------------------------------------------
 
 When formatted by the commands.py script a cvar will go from looking like this:
 ```c

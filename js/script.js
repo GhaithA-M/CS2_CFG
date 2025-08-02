@@ -1,5 +1,6 @@
 /*
-    Author: Ghaith Al-Maliki (Ralfidogg)
+    Author: Ghaith Al-Maliki
+    Email: ermiyalea@mozmail.com
     GitHub: https://github.com/GhaithA-M/CS2_CFG/
     Steam: https://steamcommunity.com/id/Ralfidogg/
 */

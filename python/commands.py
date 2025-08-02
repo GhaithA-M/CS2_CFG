@@ -1,6 +1,7 @@
-#   Author: Ghaith Al-Maliki (Ralfidogg)
-#   GitHub: https://github.com/GhaithA-M/CS2_CFG/
-#   Steam: https://steamcommunity.com/id/Ralfidogg/
+# Author: Ghaith Al-Maliki
+# Email: ermiyalea@mozmail.com
+# GitHub: https://github.com/GhaithA-M/CS2_CFG/
+# Steam: https://steamcommunity.com/id/Ralfidogg/
 
 import sys
 
