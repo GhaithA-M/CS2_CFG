@@ -1,0 +1,92 @@
+var cvarsData = [
+    {
+        normalName: 'Mp Dm Teammode',
+        cvarName: 'mp_dm_teammode',
+        defaultValue: '2',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Dm Teammode Kill Score',
+        cvarName: 'mp_dm_teammode_kill_score',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Dm Teammode Bonus Score',
+        cvarName: 'mp_dm_teammode_bonus_score',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Solid Teammates',
+        cvarName: 'mp_solid_teammates',
+        defaultValue: '2',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Fraglimit',
+        cvarName: 'mp_fraglimit',
+        defaultValue: '100',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Talk Enemy Living',
+        cvarName: 'sv_talk_enemy_living',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Talk Enemy Dead',
+        cvarName: 'sv_talk_enemy_dead',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Deadtalk',
+        cvarName: 'sv_deadtalk',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Warmuptime',
+        cvarName: 'mp_warmuptime',
+        defaultValue: '65',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Gameinstructor Enable',
+        cvarName: 'sv_gameinstructor_enable',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+];

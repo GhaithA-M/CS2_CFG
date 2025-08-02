@@ -1,6 +1,6 @@
-The purpose of this script is to format your server's existing *.cfg file to be compatible with the "script.js" that reads the "cvars.json" file
+The purpose of this script is to format your server's existing *.cfg file to be compatible with the "script.js" that reads the "custom.json" file
 
-The "script.js" reads from the "cvars.json", so for any commands to show up they must be correctly formatted in the "cvars.json" file.
+The "script.js" reads from the "custom.json", so for any commands to show up they must be correctly formatted in the "custom.json" file.
 
 1. Copy / paste your existing *.cfg file to the "python/cfg" folder.
 
@@ -15,7 +15,7 @@ Example: *python commands.py cfg/gamemode_custom.cfg output.json*
 Input file: "gamemode_custom.cfg"
 Output file: "output.json"
 
-4. Copy/paste the contents of "python/output.json" to your "js/cvars.json", your custom .cfg should now show up in the GUI.
+4. Copy/paste the contents of "python/output.json" to your "js/custom.json", your custom .cfg should now show up in the GUI.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
     B --> C[Open cmd.exe in &quot;python&quot; folder]
     C --> D[Run &quot;python commands.py input.cfg output.json&quot;]
     D --> E[Script reformats .cfg file to .json]
-    E --> F[Copy the contents of output.json to cvars.json]
+    E --> F[Copy the contents of output.json to custom.json]
     F --> G[Commands now show up in GUI]
     
     D --> I[Example:<br/>&quot;python commands.py cfg/gamemode_custom.cfg output.json&quot;]

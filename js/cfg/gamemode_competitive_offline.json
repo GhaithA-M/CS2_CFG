@@ -1,0 +1,20 @@
+var cvarsData = [
+    {
+        normalName: 'Bot Quota',
+        cvarName: 'bot_quota',
+        defaultValue: '10',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Bot Quota Mode',
+        cvarName: 'bot_quota_mode',
+        defaultValue: 'fill',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+];

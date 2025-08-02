@@ -1,0 +1,362 @@
+var cvarsData = [
+    {
+        normalName: 'Bot Custom Strat',
+        cvarName: 'bot_custom_strat',
+        defaultValue: '""',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Bot Quota Mode',
+        cvarName: 'bot_quota_mode',
+        defaultValue: 'fill',
+        comment: 'match',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Warmuptime',
+        cvarName: 'mp_warmuptime',
+        defaultValue: '120',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Warmuptime All Players Connected',
+        cvarName: 'mp_warmuptime_all_players_connected',
+        defaultValue: '6',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Maxrounds',
+        cvarName: 'mp_maxrounds',
+        defaultValue: '15',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Bot Allow Rogues',
+        cvarName: 'bot_allow_rogues',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Bot Difficulty',
+        cvarName: 'bot_difficulty',
+        defaultValue: '3',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Limitteams',
+        cvarName: 'mp_limitteams',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Autoteambalance',
+        cvarName: 'mp_autoteambalance',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Hostages Max',
+        cvarName: 'mp_hostages_max',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Hostages Spawn Same Every Round',
+        cvarName: 'mp_hostages_spawn_same_every_round',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Bots Force Rebuy Every Round',
+        cvarName: 'sv_bots_force_rebuy_every_round',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Bot Defer To Human Goals',
+        cvarName: 'bot_defer_to_human_goals',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Cash Team Bonus Shorthanded',
+        cvarName: 'cash_team_bonus_shorthanded',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Ff Damage Reduction Bullets',
+        cvarName: 'ff_damage_reduction_bullets',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Ff Damage Reduction Grenade',
+        cvarName: 'ff_damage_reduction_grenade',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Ff Damage Reduction Grenade Self',
+        cvarName: 'ff_damage_reduction_grenade_self',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Ff Damage Reduction Other',
+        cvarName: 'ff_damage_reduction_other',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Death Drop Defuser',
+        cvarName: 'mp_death_drop_defuser',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Death Drop Grenade',
+        cvarName: 'mp_death_drop_grenade',
+        defaultValue: '2',
+        comment: '0=none, 1=best, 2=current or best',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Death Drop Gun',
+        cvarName: 'mp_death_drop_gun',
+        defaultValue: '1',
+        comment: '0=none, 1=best, 2=current or best',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Defuser Allocation',
+        cvarName: 'mp_defuser_allocation',
+        defaultValue: '0',
+        comment: '0=none, 1=random, 2=everyone',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Friendlyfire',
+        cvarName: 'mp_friendlyfire',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Maxmoney',
+        cvarName: 'mp_maxmoney',
+        defaultValue: '10000',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Solid Teammates',
+        cvarName: 'mp_solid_teammates',
+        defaultValue: '2',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Allow Votes',
+        cvarName: 'sv_allow_votes',
+        defaultValue: '1',
+        comment: 'Voting allowed in this mode',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Deadtalk',
+        cvarName: 'sv_deadtalk',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Display Kill Assists',
+        cvarName: 'mp_display_kill_assists',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Halftime',
+        cvarName: 'mp_halftime',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Match Can Clinch',
+        cvarName: 'mp_match_can_clinch',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Weapons Allow Typecount',
+        cvarName: 'mp_weapons_allow_typecount',
+        defaultValue: '-1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Duplicate Playernames Ok',
+        cvarName: 'sv_duplicate_playernames_ok',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Items Prohibited',
+        cvarName: 'mp_items_prohibited',
+        defaultValue: '""',
+        comment: 'don't restrict experimental weapons',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Heavyassaultsuit Cooldown',
+        cvarName: 'mp_heavyassaultsuit_cooldown',
+        defaultValue: '0',
+        comment: 'no cooldown on buying heavy armor',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Health Approach Enabled',
+        cvarName: 'sv_health_approach_enabled',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Healthshot Healthboost Time',
+        cvarName: 'healthshot_healthboost_time',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Healthshot Health',
+        cvarName: 'healthshot_health',
+        defaultValue: '50',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Health Approach Speed',
+        cvarName: 'sv_health_approach_speed',
+        defaultValue: '20',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Guardian Starting Equipment Humans',
+        cvarName: 'sv_guardian_starting_equipment_humans',
+        defaultValue: '"weapon_healthshot"',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Gameinstructor Enable',
+        cvarName: 'sv_gameinstructor_enable',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+];

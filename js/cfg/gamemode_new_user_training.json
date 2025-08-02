@@ -1,0 +1,137 @@
+var cvarsData = [
+    {
+        normalName: 'Exec',
+        cvarName: 'exec',
+        defaultValue: 'gamemode_competitive.cfg',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Maxrounds',
+        cvarName: 'mp_maxrounds',
+        defaultValue: '12',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Bot Difficulty',
+        cvarName: 'bot_difficulty',
+        defaultValue: '4',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Custom Bot Difficulty',
+        cvarName: 'custom_bot_difficulty',
+        defaultValue: '4',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Bot Quota',
+        cvarName: 'bot_quota',
+        defaultValue: '10',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Bot Quota Mode',
+        cvarName: 'bot_quota_mode',
+        defaultValue: 'fill',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Disable Teamselect Menu',
+        cvarName: 'sv_disable_teamselect_menu',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Human Autojoin Team',
+        cvarName: 'sv_human_autojoin_team',
+        defaultValue: '2',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Match Can Clinch',
+        cvarName: 'mp_match_can_clinch',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Sv Gameinstructor Enable',
+        cvarName: 'sv_gameinstructor_enable',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Bot Allow Rifles',
+        cvarName: 'bot_allow_rifles',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Bot Allow Snipers',
+        cvarName: 'bot_allow_snipers',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Bot Allow Machine Guns',
+        cvarName: 'bot_allow_machine_guns',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Bot Allow Shotguns',
+        cvarName: 'bot_allow_shotguns',
+        defaultValue: '0',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Bot Ai Bt',
+        cvarName: 'mp_bot_ai_bt',
+        defaultValue: '"scripts/ai/practice/newplayer_dust2_01.kv3"',
+        comment: 'Dust II Only',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+];

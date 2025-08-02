@@ -1,0 +1,20 @@
+var cvarsData = [
+    {
+        normalName: 'Mp Weapons Allow Map Placed',
+        cvarName: 'mp_weapons_allow_map_placed',
+        defaultValue: '1',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+    {
+        normalName: 'Mp Timelimit',
+        cvarName: 'mp_timelimit',
+        defaultValue: '5',
+        comment: '',
+        category: 'custom',
+        enableTooltip: false,
+        description: ''
+    },
+];

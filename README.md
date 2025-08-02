@@ -2,17 +2,9 @@
 A web app for CS2 server operators, it reformats your .cfg and retains comments into a custom **server.cfg**.
 
 
+For creating your own **custom.json**, I've provided a python script.
 The cvars are derived from the default **gamemode_casual.cfg** configuration file that runs on fresh official CS2 casual servers.
 Included in the **python** folder is a simple script which automates the process of adapting any **gamemode_#.cfg** file to json.
-
-
-Input your cvar variable and copy / paste the output into your **server.cfg** file.
-
-----------------------------------------------------------------------------------
-
-Custom **cvars.json**:
-
-For creating your own **cvars.json**, I've provided a python script.
 
 ----------------------------------------------------------------------------------
 

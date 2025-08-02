@@ -1,5 +1,6 @@
 <!--
-    Author: Ghaith Al-Maliki (Ralfidogg)
+    Author: Ralfidogg (GAM)
+    Email: ermiyalea@mozmail.com
     GitHub: https://github.com/GhaithA-M/CS2_CFG/
     Steam: https://steamcommunity.com/id/Ralfidogg/
 -->
@@ -20,9 +21,27 @@
 
             <div class="description">
                 <p> Generate a custom server config file for Counter-Strike 2 dedicated servers
-                    <br></br>
-                    Lines will only print if the default value is changed (default: gamemode_casual.cfg)
                 </p>
+            </div>
+
+            <div class="config-selector-container">
+                <label for="configSelector">Select Config Template:</label>
+                <select id="configSelector">
+                    <option value="custom.json">Custom (Default)</option>
+                    <option value="gamemode_casual.json">Casual Mode</option>
+                    <option value="gamemode_competitive.json">Competitive Mode</option>
+                    <option value="gamemode_deathmatch.json">Deathmatch Mode</option>
+                    <option value="gamemode_armsrace.json">Arms Race</option>
+                    <option value="gamemode_demolition.json">Demolition</option>
+                    <option value="gamemode_workshop.json">Workshop</option>
+                    <option value="gamemode_teamdeathmatch.json">Team Deathmatch</option>
+                    <option value="gamemode_retakecasual.json">Retake Casual</option>
+                    <option value="gamemode_cooperative.json">Cooperative</option>
+                    <option value="gamemode_coopmission.json">Co-op Mission</option>
+                    <option value="gamemode_competitive2v2.json">Competitive 2v2</option>
+                    <option value="gamemode_dm_freeforall.json">Free-for-All Deathmatch</option>
+                </select>
+                <button id="loadConfigButton">Load Config</button>
             </div>
 
             <div class="checkbox-container">
@@ -149,7 +168,7 @@
             <textarea id="output" rows="20"></textarea>
         </div>
     </div>
+    <script src="js/custom.json"></script>
     <script src="js/script.js"></script>
-    <script src="js/cvars.js"></script>
 </body>
 </html>

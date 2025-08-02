@@ -10,8 +10,115 @@ document.addEventListener('DOMContentLoaded', function() {
     /* 2. Get the element that will display the generated configuration output */
     var output = document.getElementById('output');
     var showAllCheckbox = document.getElementById('showAllCheckbox');
+    var configSelector = document.getElementById('configSelector');
+    var loadConfigButton = document.getElementById('loadConfigButton');
 
-    /* 3. Function to create form inputs and tooltips for each category */
+    // Global variable to store current cvars data
+    let cvarsData = [];
+    let allConfigs = {}; // Store all config files in memory
+
+    /* 3. Function to load all config files at once */
+    async function loadAllConfigs() {
+        const configFiles = [
+            'custom.json',
+            'gamemode_casual.json',
+            'gamemode_competitive.json',
+            'gamemode_deathmatch.json',
+            'gamemode_armsrace.json',
+            'gamemode_demolition.json',
+            'gamemode_workshop.json',
+            'gamemode_teamdeathmatch.json',
+            'gamemode_retakecasual.json',
+            'gamemode_cooperative.json',
+            'gamemode_coopmission.json',
+            'gamemode_competitive2v2.json',
+            'gamemode_dm_freeforall.json'
+        ];
+
+        for (const filename of configFiles) {
+            try {
+                // Determine the correct path based on filename
+                let filePath;
+                if (filename === 'custom.json') {
+                    filePath = `js/${filename}`;
+                } else {
+                    filePath = `js/cfg/${filename}`;
+                }
+                
+                const response = await fetch(filePath);
+                if (response.ok) {
+                    const text = await response.text();
+                    
+                    // Extract the cvarsData array from the JavaScript file
+                    const match = text.match(/var cvarsData = (\[[\s\S]*?\]);/);
+                    if (match) {
+                        const jsonStr = match[1];
+                        const configData = JSON.parse(jsonStr);
+                        allConfigs[filename] = configData;
+                        console.log(`Loaded ${filename} with ${configData.length} commands`);
+                    }
+                }
+            } catch (error) {
+                console.log(`Could not load ${filename} - file may not exist yet`);
+            }
+        }
+        
+        // Start with custom.json if available, otherwise use the first available config
+        if (allConfigs['custom.json']) {
+            switchToConfig('custom.json');
+        } else if (Object.keys(allConfigs).length > 0) {
+            const firstConfig = Object.keys(allConfigs)[0];
+            switchToConfig(firstConfig);
+        }
+    }
+
+    /* 4. Function to switch between loaded configs */
+    function switchToConfig(filename) {
+        if (allConfigs[filename]) {
+            cvarsData = [...allConfigs[filename]]; // Copy the config data
+            
+            // Clear existing form inputs
+            clearAllForms();
+            
+            // Recreate form inputs with new data
+            createAllFormInputs();
+            
+            // Update output
+            updateOutput();
+            
+            console.log(`Switched to ${filename} with ${cvarsData.length} commands`);
+        } else {
+            console.error(`Config ${filename} not found in loaded configs`);
+        }
+    }
+
+    /* 4. Function to clear all form inputs */
+    function clearAllForms() {
+        const categories = ['gen', 'bhop', 'time', 'bot', 'cash', 'ff', 'mp', 'talk', 'ammo', 'ds', 'misc', 'custom'];
+        categories.forEach(category => {
+            const form = document.getElementById(`configForm${category}`);
+            if (form) {
+                form.innerHTML = '';
+            }
+        });
+    }
+
+    /* 5. Function to create all form inputs */
+    function createAllFormInputs() {
+        // Group the cvars by their category
+        const cvarsByCategory = cvarsData.reduce((acc, cvar) => {
+            acc[cvar.category] = acc[cvar.category] || [];
+            acc[cvar.category].push(cvar);
+            return acc;
+        }, {});
+
+        // Create form inputs for each category
+        Object.keys(cvarsByCategory).forEach(category => {
+            createFormInputs(category, cvarsByCategory[category]);
+        });
+    }
+
+    /* 6. Function to create form inputs and tooltips for each category */
     function createFormInputs(category, cvars) {
         /* 3.1 Get the form element for the given category */
         const form = document.getElementById(`configForm${category}`);
@@ -57,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    /* 4. Function to handle the accordion functionality (show/hide sections) */
+    /* 7. Function to handle the accordion functionality (show/hide sections) */
     function setupAccordion() {
         /* 4.1 Select all accordion headers and set up click event listeners */
         document.querySelectorAll('.accordion-header').forEach(button => {
@@ -75,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    /* 5. Function to update the output text area with the current configuration */
+    /* 8. Function to update the output text area with the current configuration */
     function updateOutput() {
         /* 5.1 Start with an empty string */
         output.value = '';
@@ -99,23 +206,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    /* 6. Group the cvars by their category */
-    const cvarsByCategory = cvarsData.reduce((acc, cvar) => {
-        acc[cvar.category] = acc[cvar.category] || [];
-        acc[cvar.category].push(cvar);
-        return acc;
-    }, {});
-
-    /* 7. Create form inputs for each category */
-    Object.keys(cvarsByCategory).forEach(category => {
-        createFormInputs(category, cvarsByCategory[category]);
-    });
-
-    /* 8. Set up accordion functionality and update the output initially */
+    /* 11. Set up accordion functionality */
     setupAccordion();
-    updateOutput();
 
-    /* 9. Add event listeners to the reset button */
+    /* 12. Add event listeners to the reset button */
     document.getElementById('resetButton').addEventListener('click', function() {
         // Add a confirmation dialog
         if (confirm("Are you sure you want to reset all settings to their default values?")) {
@@ -133,4 +227,13 @@ document.addEventListener('DOMContentLoaded', function() {
     showAllCheckbox.addEventListener('change', function() {
         updateOutput();
     });
+
+    /* 13. Add event listeners for config selector */
+    loadConfigButton.addEventListener('click', function() {
+        const selectedFile = configSelector.value;
+        switchToConfig(selectedFile);
+    });
+
+    /* 14. Initialize by loading all configs */
+    loadAllConfigs();
 });
