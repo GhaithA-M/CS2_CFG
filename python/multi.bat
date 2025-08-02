@@ -97,7 +97,8 @@ if exist "output\*.json" (
 )
 
 echo Press any key to exit...
-pause >nul
+:: No pausing so cmd.exe closes itself when done
+:: pause >nul
 
 
 echo.

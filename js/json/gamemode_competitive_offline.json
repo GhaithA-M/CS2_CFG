@@ -1,19 +1,19 @@
 var cvarsData_competitive_offline = [
     {
-        normalName: 'Bot Quota',
-        cvarName: 'bot_quota',
-        defaultValue: '10',
-        comment: '',
-        category: 'bot',
+        normalName: "Bot Quota",
+        cvarName: "bot_quota",
+        defaultValue: "10",
+        comment: "",
+        category: "bot",
         enableTooltip: false,
         description: ''
     },
     {
-        normalName: 'Bot Quota Mode',
-        cvarName: 'bot_quota_mode',
-        defaultValue: 'fill',
-        comment: '',
-        category: 'bot',
+        normalName: "Bot Quota Mode",
+        cvarName: "bot_quota_mode",
+        defaultValue: "fill",
+        comment: "",
+        category: "bot",
         enableTooltip: false,
         description: ''
     },

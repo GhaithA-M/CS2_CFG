@@ -17,160 +17,370 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+
     <div class="container">
         <div class="form-container">
-
-            <h1>Counter-Strike 2 Dedicated Server Configurator</h1>
-
-            <div class="description">
-                <p> Generate a custom server config file for Counter-Strike 2 dedicated servers
-                </p>
+            <!-- Modern Header -->
+            <div class="header-section">
+                <h1>Counter-Strike 2 Dedicated Server Configurator</h1>
+                <div class="description">
+                    <p>Generate a custom server config file for Counter-Strike 2 dedicated servers</p>
+                </div>
             </div>
 
+            <!-- Modern Config Selector -->
             <div class="config-selector-container">
-                <label for="configSelector">Select Config Template:</label>
-                <select id="configSelector">
-                    <option value="custom.json">Custom (Default)</option>
-                    <option value="gamemode_casual.json">Casual Mode</option>
-                    <option value="gamemode_competitive.json">Competitive Mode</option>
-                    <option value="gamemode_deathmatch.json">Deathmatch Mode</option>
-                    <option value="gamemode_armsrace.json">Arms Race</option>
-                    <option value="gamemode_demolition.json">Demolition</option>
-                    <option value="gamemode_workshop.json">Workshop</option>
-                    <option value="gamemode_teamdeathmatch.json">Team Deathmatch</option>
-                    <option value="gamemode_retakecasual.json">Retake Casual</option>
-                    <option value="gamemode_cooperative.json">Cooperative</option>
-                    <option value="gamemode_coopmission.json">Co-op Mission</option>
-                    <option value="gamemode_competitive2v2.json">Competitive 2v2</option>
-                    <option value="gamemode_dm_freeforall.json">Free-for-All Deathmatch</option>
+                <div class="config-selector-header">
+                    <label for="configSelector">Config Template</label>
+                </div>
+                
+                <select id="configSelector" class="modern-select">
+                    <optgroup label="Popular Configs">
+                        <option value="custom.json">Custom (Default)</option>
+                        <option value="gamemode_casual.json">Casual Mode</option>
+                        <option value="gamemode_competitive.json">Competitive Mode</option>
+                        <option value="gamemode_deathmatch.json">Deathmatch Mode</option>
+                    </optgroup>
+                    <optgroup label="Game Modes">
+                        <option value="gamemode_armsrace.json">Arms Race</option>
+                        <option value="gamemode_demolition.json">Demolition</option>
+                        <option value="gamemode_workshop.json">Workshop</option>
+                        <option value="gamemode_teamdeathmatch.json">Team Deathmatch</option>
+                        <option value="gamemode_retakecasual.json">Retake Casual</option>
+                        <option value="gamemode_competitive2v2.json">Competitive 2v2</option>
+                        <option value="gamemode_dm_freeforall.json">Free-for-All Deathmatch</option>
+                    </optgroup>
+                    <optgroup label="Specialized Configs">
+                        <option value="gamemode_new_user_training.json">New User Training</option>
+                        <option value="gamemode_deathmatch_tmm.json">Deathmatch TMM</option>
+                        <option value="gamemode_deathmatch_short.json">Deathmatch Short</option>
+                        <option value="gamemode_competitive_tmm.json">Competitive TMM</option>
+                        <option value="gamemode_competitive_short.json">Competitive Short</option>
+                        <option value="gamemode_competitive_offline.json">Competitive Offline</option>
+                        <option value="gamemode_competitive2v2_offline.json">Competitive 2v2 Offline</option>
+                    </optgroup>
                 </select>
-                <button id="loadConfigButton">Load Config</button>
-            </div>
-
-            <div class="checkbox-container">
-                <input type="checkbox" id="showAllCheckbox">
-                <label for="showAllCheckbox">Show all commands, including defaults</label>
-            </div>
-
-            <div class="resetButton-container">
-                <button id="resetButton">Reset to default</button>
+                
+                <div class="flex items-center justify-between mt-3">
+                    <div class="flex items-center space-x-4">
+                        <button id="loadConfigButton" class="bg-cs-green hover:bg-cs-green-hover text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                            </svg>
+                            <span>Load Config</span>
+                        </button>
+                        
+                        <label class="flex items-center space-x-2 text-sm text-gray-300 cursor-pointer">
+                            <input type="checkbox" id="showAllCheckbox" class="w-4 h-4 text-cs-green bg-cs-gray border-gray-600 rounded focus:ring-cs-green focus:ring-2" checked>
+                            <span>Show all commands</span>
+                        </label>
+                    </div>
+                    
+                    <button id="resetButton" class="text-gray-400 hover:text-white px-3 py-1.5 rounded-md hover:bg-cs-gray transition-colors text-sm flex items-center space-x-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        <span>Reset</span>
+                    </button>
                 </div>
+            </div>
 
-            <div class="accordion">
-                <div class="accordion-section">
-                    <button class="accordion-header">General</button>
-                    <div class="accordion-content">
-                        <form id="configFormgen">
+            <!-- Modern Accordion Sections -->
+            <div class="mb-4 flex justify-end">
+                <button id="expandAllBtn" class="text-gray-400 hover:text-cs-green px-3 py-1.5 rounded-md hover:bg-cs-gray transition-colors text-sm flex items-center space-x-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                    <span>Expand All</span>
+                </button>
+            </div>
+            <div class="space-y-3">
+                <div class="accordion-section bg-cs-light-gray border border-gray-700 rounded-lg overflow-hidden transition-all duration-300 hover:border-cs-green/30">
+                    <button class="accordion-header w-full px-4 py-3 text-left bg-cs-gray hover:bg-cs-gray/80 transition-colors flex items-center justify-between text-white font-medium">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-cs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>General</span>
+                        </div>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden">
+                        <form id="configFormgen" class="p-4 space-y-3">
                         </form>
                     </div>
                 </div>
 
-                <div class="accordion-section">
-                    <button class="accordion-header">Surfing & Bunnyhopping</button>
-                    <div class="accordion-content">
-                        <form id="configFormbhop">
+                <div class="accordion-section bg-cs-light-gray border border-gray-700 rounded-lg overflow-hidden transition-all duration-300 hover:border-cs-green/30">
+                    <button class="accordion-header w-full px-4 py-3 text-left bg-cs-gray hover:bg-cs-gray/80 transition-colors flex items-center justify-between text-white font-medium">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-cs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span>Surfing & Bunnyhopping</span>
+                        </div>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden">
+                        <form id="configFormbhop" class="p-4 space-y-3">
                         </form>
                     </div>
                 </div>
             
-                <div class="accordion-section">
-                    <button class="accordion-header">Time</button>
-                    <div class="accordion-content">
-                        <form id="configFormtime">
+                <div class="accordion-section bg-cs-light-gray border border-gray-700 rounded-lg overflow-hidden transition-all duration-300 hover:border-cs-green/30">
+                    <button class="accordion-header w-full px-4 py-3 text-left bg-cs-gray hover:bg-cs-gray/80 transition-colors flex items-center justify-between text-white font-medium">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-cs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>Time</span>
+                        </div>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden">
+                        <form id="configFormtime" class="p-4 space-y-3">
                         </form>
                     </div>
                 </div>
 
-                <div class="accordion-section">
-                    <button class="accordion-header">Bots</button>
-                    <div class="accordion-content">
-                        <form id="configFormbot">
+                <div class="accordion-section bg-cs-light-gray border border-gray-700 rounded-lg overflow-hidden transition-all duration-300 hover:border-cs-green/30">
+                    <button class="accordion-header w-full px-4 py-3 text-left bg-cs-gray hover:bg-cs-gray/80 transition-colors flex items-center justify-between text-white font-medium">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-cs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>Bots</span>
+                        </div>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden">
+                        <form id="configFormbot" class="p-4 space-y-3">
                         </form>
                     </div>
                 </div>
 
-                <div class="accordion-section">
-                    <button class="accordion-header">Cash / Income</button>
-                    <div class="accordion-content">
-                        <form id="configFormcash">
+                <div class="accordion-section bg-cs-light-gray border border-gray-700 rounded-lg overflow-hidden transition-all duration-300 hover:border-cs-green/30">
+                    <button class="accordion-header w-full px-4 py-3 text-left bg-cs-gray hover:bg-cs-gray/80 transition-colors flex items-center justify-between text-white font-medium">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-cs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                            <span>Cash / Income</span>
+                        </div>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden">
+                        <form id="configFormcash" class="p-4 space-y-3">
                         </form>
                     </div>
                 </div>
 
-                <div class="accordion-section">
-                    <button class="accordion-header">Friendly Fire</button>
-                    <div class="accordion-content">
-                        <form id="configFormff">
+                <div class="accordion-section bg-cs-light-gray border border-gray-700 rounded-lg overflow-hidden transition-all duration-300 hover:border-cs-green/30">
+                    <button class="accordion-header w-full px-4 py-3 text-left bg-cs-gray hover:bg-cs-gray/80 transition-colors flex items-center justify-between text-white font-medium">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-cs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L18.364 5.636M5.636 18.364l12.728-12.728"></path>
+                            </svg>
+                            <span>Friendly Fire</span>
+                        </div>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden">
+                        <form id="configFormff" class="p-4 space-y-3">
                         </form>
                     </div>
                 </div>
 
-                <div class="accordion-section">
-                    <button class="accordion-header">Multiplayer</button>
-                    <div class="accordion-content">
-                        <form id="configFormmp">
+                <div class="accordion-section bg-cs-light-gray border border-gray-700 rounded-lg overflow-hidden transition-all duration-300 hover:border-cs-green/30">
+                    <button class="accordion-header w-full px-4 py-3 text-left bg-cs-gray hover:bg-cs-gray/80 transition-colors flex items-center justify-between text-white font-medium">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-cs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            <span>Multiplayer</span>
+                        </div>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden">
+                        <form id="configFormmp" class="p-4 space-y-3">
                         </form>
                     </div>
                 </div>
 
-                <div class="accordion-section">
-                    <button class="accordion-header">Talking & Voting</button>
-                    <div class="accordion-content">
-                        <form id="configFormtalk">
+                <div class="accordion-section bg-cs-light-gray border border-gray-700 rounded-lg overflow-hidden transition-all duration-300 hover:border-cs-green/30">
+                    <button class="accordion-header w-full px-4 py-3 text-left bg-cs-gray hover:bg-cs-gray/80 transition-colors flex items-center justify-between text-white font-medium">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-cs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                            <span>Talking & Voting</span>
+                        </div>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden">
+                        <form id="configFormtalk" class="p-4 space-y-3">
                         </form>
                     </div>
                 </div>
 
-                <div class="accordion-section">
-                    <button class="accordion-header">Ammo</button>
-                    <div class="accordion-content">
-                        <form id="configFormammo">
+                <div class="accordion-section bg-cs-light-gray border border-gray-700 rounded-lg overflow-hidden transition-all duration-300 hover:border-cs-green/30">
+                    <button class="accordion-header w-full px-4 py-3 text-left bg-cs-gray hover:bg-cs-gray/80 transition-colors flex items-center justify-between text-white font-medium">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-cs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                            <span>Ammo</span>
+                        </div>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden">
+                        <form id="configFormammo" class="p-4 space-y-3">
                         </form>
                     </div>
                 </div>
 
-                <div class="accordion-section">
-                    <button class="accordion-header">Default Spawn</button>
-                    <div class="accordion-content">
-                        <form id="configFormds">
+                <div class="accordion-section bg-cs-light-gray border border-gray-700 rounded-lg overflow-hidden transition-all duration-300 hover:border-cs-green/30">
+                    <button class="accordion-header w-full px-4 py-3 text-left bg-cs-gray hover:bg-cs-gray/80 transition-colors flex items-center justify-between text-white font-medium">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-cs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                            <span>Default Spawn</span>
+                        </div>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden">
+                        <form id="configFormds" class="p-4 space-y-3">
                         </form>
                     </div>
                 </div>
 
-                <div class="accordion-section">
-                    <button class="accordion-header">Miscellaneous</button>
-                    <div class="accordion-content">
-                        <form id="configFormmisc">
+                <div class="accordion-section bg-cs-light-gray border border-gray-700 rounded-lg overflow-hidden transition-all duration-300 hover:border-cs-green/30">
+                    <button class="accordion-header w-full px-4 py-3 text-left bg-cs-gray hover:bg-cs-gray/80 transition-colors flex items-center justify-between text-white font-medium">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-cs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h4a1 1 0 011 1v2m4 0V2a1 1 0 011-1h1a2 2 0 012 2v16a2 2 0 01-2 2H5a2 2 0 01-2-2V3a2 2 0 012-2h1a1 1 0 011 1v2"></path>
+                            </svg>
+                            <span>Miscellaneous</span>
+                        </div>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden">
+                        <form id="configFormmisc" class="p-4 space-y-3">
                         </form>
                     </div>
                 </div>
 
-                <div class="accordion-section">
-                    <button class="accordion-header">Custom</button>
-                    <div class="accordion-content">
-                        <form id="configFormcustom">
+                <div class="accordion-section bg-cs-light-gray border border-gray-700 rounded-lg overflow-hidden transition-all duration-300 hover:border-cs-green/30">
+                    <button class="accordion-header w-full px-4 py-3 text-left bg-cs-gray hover:bg-cs-gray/80 transition-colors flex items-center justify-between text-white font-medium">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-cs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                            </svg>
+                            <span>Custom</span>
+                        </div>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content hidden">
+                        <form id="configFormcustom" class="p-4 space-y-3">
                         </form>
                     </div>
                 </div>
             </div>
 
-            <div class="link-container">
-                <div class="github-hyperlink" id="github">
-                    <a href="https://github.com/GhaithA-M/CS2_CFG" target="_blank">Github Repository</a>
+            <!-- Modern Footer Links -->
+            <div class="mt-6 pt-4 border-t border-gray-700">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <a href="https://github.com/GhaithA-M/CS2_CFG" target="_blank" 
+                           class="flex items-center space-x-2 text-gray-400 hover:text-cs-green transition-colors text-sm">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            <span>GitHub Repository</span>
+                        </a>
+                        <a href="https://steamcommunity.com/id/Ralfidogg/myworkshopfiles/?appid=730" target="_blank" 
+                           class="flex items-center space-x-2 text-gray-400 hover:text-cs-green transition-colors text-sm">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.63 3.87 10.4 9.08 11.83.66.12.9-.29.9-.64v-2.23c-3.66.8-4.44-1.76-4.44-1.76-.6-1.52-1.46-1.92-1.46-1.92-1.19-.82.09-.8.09-.8 1.32.09 2.02 1.36 2.02 1.36 1.17 2.01 3.07 1.43 3.82 1.09.12-.85.45-1.43.82-1.76-2.87-.33-5.89-1.44-5.89-6.41 0-1.42.5-2.58 1.33-3.49-.13-.33-.58-1.69.13-3.52 0 0 1.09-.36 3.57 1.33 1.04-.29 2.15-.43 3.26-.44 1.11.01 2.22.15 3.26.44 2.48-1.69 3.57-1.33 3.57-1.33.71 1.83.26 3.19.13 3.52.83.91 1.33 2.07 1.33 3.49 0 5.01-3.07 6.08-5.99 6.4.47.41.9 1.21.9 2.44v3.62c0 .35.24.76.9.64C20.13 22.4 24 17.63 24 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                            <span>Steam Workshop</span>
+                        </a>
+                    </div>
+                    <div class="text-xs text-gray-500">
+                        Made with ❤️ by Ralfidogg (GAM)
+                    </div>
                 </div>
-            
-                <div class="steam-hyperlink" id="copyright">
-                    <a href="https://steamcommunity.com/id/Ralfidogg/myworkshopfiles/?appid=730" target="_blank">Steam Workshop</a>
-                </div>
-				
             </div>
         </div>
         
-        <div class="output-container">
-            <label for="output">Generated server.cfg:</label>
-            <textarea id="output" rows="20"></textarea>
+        <!-- Modern Output Container -->
+        <div class="output-container bg-cs-gray border border-cs-green/30 rounded-lg p-4 transition-all duration-300 hover:border-cs-green/50 hover:shadow-lg">
+            <div class="flex items-center justify-between mb-3">
+                <label for="output" class="text-sm font-semibold text-white uppercase tracking-wide">Generated server.cfg</label>
+                <div class="flex items-center space-x-2">
+                    <button id="copyBtn" class="p-1.5 rounded-md hover:bg-cs-light-gray transition-colors text-gray-400 hover:text-cs-green" title="Copy to clipboard">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </button>
+                    <button id="downloadBtn" class="p-1.5 rounded-md hover:bg-cs-light-gray transition-colors text-gray-400 hover:text-cs-green" title="Download config">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <textarea id="output" rows="20" 
+                      class="w-full bg-cs-light-gray border border-gray-600 rounded-md px-3 py-2 text-sm text-white font-mono focus:outline-none focus:border-cs-green focus:ring-1 focus:ring-cs-green/20 transition-colors resize-none"
+                      placeholder="Your generated server configuration will appear here..."></textarea>
         </div>
     </div>
+    <!-- Load all gamemode config files as scripts to bypass CORS -->
+    <script src="js/custom.json"></script>
+    <script src="js/json/gamemode_casual.json"></script>
+    <script src="js/json/gamemode_competitive.json"></script>
+    <script src="js/json/gamemode_deathmatch.json"></script>
+    <script src="js/json/gamemode_armsrace.json"></script>
+    <script src="js/json/gamemode_demolition.json"></script>
+    <script src="js/json/gamemode_workshop.json"></script>
+    <script src="js/json/gamemode_teamdeathmatch.json"></script>
+    <script src="js/json/gamemode_retakecasual.json"></script>
+    <script src="js/json/gamemode_competitive2v2.json"></script>
+    <script src="js/json/gamemode_dm_freeforall.json"></script>
+    <script src="js/json/gamemode_new_user_training.json"></script>
+    <script src="js/json/gamemode_deathmatch_tmm.json"></script>
+    <script src="js/json/gamemode_deathmatch_short.json"></script>
+    <script src="js/json/gamemode_competitive_tmm.json"></script>
+    <script src="js/json/gamemode_competitive_short.json"></script>
+    <script src="js/json/gamemode_competitive_offline.json"></script>
+    <script src="js/json/gamemode_competitive2v2_offline.json"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

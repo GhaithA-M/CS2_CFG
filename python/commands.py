@@ -193,14 +193,74 @@ def process_file(input_file, output_file):
 # This is the entry point when you run the script
 if __name__ == "__main__":
     # Check if we got the right number of command line arguments
-    if len(sys.argv) != 3:
-        print("Usage: python commands.py <input_file> <output_file>")
-        print("Example: python commands.py cfg/gamemode_casual.cfg js/cfg/gamemode_casual.json")
+    if len(sys.argv) == 1:
+        # No arguments - process all files
+        process_all_files()
+    elif len(sys.argv) == 3:
+        # Single file processing
+        input_file = sys.argv[1]   # The .cfg file to read
+        output_file = sys.argv[2]  # The .json file to create
+        process_file(input_file, output_file)
+    else:
+        print("Usage:")
+        print("  python commands.py                                    # Process all CFG files")
+        print("  python commands.py <input_file> <output_file>        # Process single file")
+        print("Example: python commands.py cfg/gamemode_casual.cfg js/json/gamemode_casual.json")
         sys.exit(1)
 
-    # Get the input and output file paths from command line arguments
-    input_file = sys.argv[1]   # The .cfg file to read
-    output_file = sys.argv[2]  # The .json file to create
+def process_all_files():
+    """
+    Process all CFG files in the cfg directory and generate corresponding JSON files.
+    """
+    import os
+    import glob
     
-    # Process the file
-    process_file(input_file, output_file)
+    # Get the directory of this script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    cfg_dir = os.path.join(script_dir, 'cfg')
+    js_dir = os.path.join(script_dir, '..', 'js', 'json')
+    
+    # Ensure the output directory exists
+    os.makedirs(js_dir, exist_ok=True)
+    
+    # Find all CFG files
+    cfg_files = glob.glob(os.path.join(cfg_dir, '*.cfg'))
+    
+    if not cfg_files:
+        print(f"No CFG files found in {cfg_dir}")
+        return
+    
+    print(f"Found {len(cfg_files)} CFG files to process...")
+    print(f"Output directory: {js_dir}")
+    print()
+    
+    success_count = 0
+    error_count = 0
+    
+    for cfg_file in cfg_files:
+        try:
+            # Get the filename without path and extension
+            filename = os.path.basename(cfg_file)
+            name_without_ext = os.path.splitext(filename)[0]
+            
+            # Create output path
+            output_file = os.path.join(js_dir, f"{name_without_ext}.json")
+            
+            print(f"Processing {filename}...")
+            process_file(cfg_file, output_file)
+            print(f"  ✅ Generated {name_without_ext}.json")
+            success_count += 1
+            
+        except Exception as e:
+            print(f"  ❌ Error processing {filename}: {e}")
+            error_count += 1
+    
+    print()
+    print(f"Summary:")
+    print(f"  ✅ Successfully processed: {success_count} files")
+    print(f"  ❌ Errors: {error_count} files")
+    
+    if error_count == 0:
+        print("🎉 All JSON files generated successfully!")
+    else:
+        print("⚠️  Some files had errors. Check the output above.")
