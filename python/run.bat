@@ -1,1 +1,1 @@
-python commands.py server.cfg output.json
+python commands.py input.cfg output.json

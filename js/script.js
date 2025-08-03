@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var tooltip = document.createElement('span');
         tooltip.className = 'tooltip';
         tooltip.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-        tooltip.setAttribute('data-tooltip', getCommandDescription(cvar.cvarName));
+        tooltip.setAttribute('data-tooltip', getCommandDescription(cvar.cvarName, cvar.defaultValue));
         
         // Add tooltip positioning and behavior
         tooltip.addEventListener('mouseenter', function(e) {
@@ -349,8 +349,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    /* 6.5 Function to get command descriptions with min/max values and command names */
-    function getCommandDescription(commandName) {
+    /* 6.5 Function to get command descriptions with min/max values, command names, and default values */
+    function getCommandDescription(commandName, defaultValue = '') {
         const commandInfo = {
             // General Commands
             'hostname': {
@@ -595,13 +595,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 description: 'Starting money for each player',
                 min: '0',
                 max: '16000',
-                type: 'integer'
+                type: 'integer',
+                default: '800'
             },
             'mp_maxmoney': {
                 description: 'Maximum money a player can have',
                 min: '0',
                 max: '16000',
-                type: 'integer'
+                type: 'integer',
+                default: '16000'
             },
             
             // Friendly Fire Commands
@@ -634,7 +636,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 min: '0',
                 max: '1',
                 type: 'boolean',
-                values: '0=disabled, 1=enabled'
+                values: '0=disabled, 1=enabled',
+                default: '1'
             },
             
             // Surfing & Bunnyhopping Commands
@@ -731,11 +734,41 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             
             // Match Play Commands
-            'mp_roundtime': 'Round time in minutes',
-            'mp_roundtime_defuse': 'Round time for defuse maps',
-            'mp_roundtime_hostage': 'Round time for hostage maps',
-            'mp_freezetime': 'Freeze time at round start in seconds',
-            'mp_buytime': 'Buy time at round start in seconds',
+            'mp_roundtime': {
+                description: 'Round time in minutes',
+                min: '0',
+                max: '10',
+                type: 'float',
+                default: '1.92'
+            },
+            'mp_roundtime_defuse': {
+                description: 'Round time for defuse maps',
+                min: '0',
+                max: '10',
+                type: 'float',
+                default: '1.92'
+            },
+            'mp_roundtime_hostage': {
+                description: 'Round time for hostage maps',
+                min: '0',
+                max: '10',
+                type: 'float',
+                default: '1.92'
+            },
+            'mp_freezetime': {
+                description: 'Freeze time at round start in seconds',
+                min: '0',
+                max: '60',
+                type: 'integer',
+                default: '15'
+            },
+            'mp_buytime': {
+                description: 'Buy time at round start in seconds',
+                min: '0',
+                max: '60',
+                type: 'integer',
+                default: '20'
+            },
             'mp_buy_anywhere': 'Allow buying anywhere (0=disabled, 1=enabled)',
             'mp_buy_during_immunity': 'Allow buying during immunity period',
             'mp_death_drop_defuser': 'Drop defuser on death (0=none, 1=best, 2=current or best)',
@@ -825,6 +858,114 @@ document.addEventListener('DOMContentLoaded', function() {
                 min: '0',
                 max: '0',
                 type: 'string'
+            },
+            
+            // Additional common commands with default values
+            'sv_airaccelerate': {
+                description: 'Air acceleration multiplier (higher = faster air movement)',
+                min: '0',
+                max: '10000',
+                type: 'float',
+                default: '1000'
+            },
+            'sv_air_max_wishspeed': {
+                description: 'Maximum air speed players can achieve',
+                min: '0',
+                max: '1000',
+                type: 'float',
+                default: '30'
+            },
+            'sv_staminajumpcost': {
+                description: 'Stamina cost for jumping (0 = no cost)',
+                min: '0.0',
+                max: '1.0',
+                type: 'float',
+                default: '0.080'
+            },
+            'sv_staminalandcost': {
+                description: 'Stamina cost for landing (0 = no cost)',
+                min: '0.0',
+                max: '1.0',
+                type: 'float',
+                default: '0.050'
+            },
+            'sv_staminamax': {
+                description: 'Maximum stamina value',
+                min: '0.0',
+                max: '1000.0',
+                type: 'float',
+                default: '80.0'
+            },
+            'sv_staminarecoveryrate': {
+                description: 'How fast stamina recovers per second',
+                min: '0.0',
+                max: '1000.0',
+                type: 'float',
+                default: '60.0'
+            },
+            'sv_wateraccelerate': {
+                description: 'Water acceleration multiplier',
+                min: '0',
+                max: '1000',
+                type: 'float',
+                default: '10'
+            },
+            'sv_waterdist': {
+                description: 'Distance from water surface for water effects',
+                min: '0',
+                max: '100',
+                type: 'float',
+                default: '12'
+            },
+            'sv_waterjump': {
+                description: 'Enable/disable water jumping',
+                min: '0',
+                max: '1',
+                type: 'boolean',
+                values: '0=disabled, 1=enabled',
+                default: '1'
+            },
+            'sv_waterwishspeed': {
+                description: 'Maximum speed in water',
+                min: '0',
+                max: '1000',
+                type: 'float',
+                default: '15'
+            },
+            'sv_gravity': {
+                description: 'World gravity (lower = higher jumps)',
+                min: '0',
+                max: '1000',
+                type: 'float',
+                default: '800'
+            },
+            'sv_maxspeed': {
+                description: 'Maximum player movement speed',
+                min: '0',
+                max: '1000',
+                type: 'float',
+                default: '320'
+            },
+            'sv_friction': {
+                description: 'Ground friction (higher = more friction)',
+                min: '0',
+                max: '100',
+                type: 'float',
+                default: '4'
+            },
+            'sv_accelerate': {
+                description: 'Ground acceleration multiplier',
+                min: '0',
+                max: '100',
+                type: 'float',
+                default: '5.5'
+            },
+            'sv_stopspeed': {
+                description: 'Speed threshold for stopping',
+                min: '0',
+                max: '1000',
+                type: 'float',
+                default: '80'
             }
         };
         
@@ -836,6 +977,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Build tooltip content
         let tooltipText = `${commandName}\n\n${info.description}`;
+        
+        // Add default value if provided
+        if (defaultValue !== '') {
+            tooltipText += `\n\nDefault: ${defaultValue}`;
+        } else if (info.default) {
+            tooltipText += `\n\nDefault: ${info.default}`;
+        }
         
         // Add min/max values if they exist
         if (info.min !== '0' || info.max !== '0') {
