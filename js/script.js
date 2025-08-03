@@ -349,6 +349,138 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    /* 6.4 Function to get actual .cfg comments for commands */
+    function getCfgComment(commandName) {
+        // Map of commands to their actual .cfg comments from gamemode_competitive.cfg
+        const cfgComments = {
+            // Bot Commands
+            'bot_autodifficulty_threshold_high': 'Value between -20.0 and 20.0 (Amount above avg human contribution score, above which a bot should lower its difficulty)',
+            'bot_autodifficulty_threshold_low': 'Value between -20.0 and 20.0 (Amount below avg human contribution score, below which a bot should raise its difficulty)',
+            'bot_chatter': '',
+            'bot_defer_to_human_goals': '',
+            'bot_defer_to_human_items': '',
+            'bot_difficulty': '',
+            'bot_quota': '',
+            'bot_quota_mode': '',
+            
+            // Contribution Score Commands
+            'contributionscore_kill_reqs': 'all about pew-pew and bullets',
+            'contributionscore_assist_reqs': 'all about pew-pew and bullets',
+            
+            // Cash Commands
+            'cash_player_bomb_defused': '',
+            'cash_player_bomb_planted': '',
+            'cash_player_damage_hostage': '',
+            'cash_player_interact_with_hostage': '',
+            'cash_player_killed_enemy_default': '',
+            'cash_player_killed_enemy_factor': '',
+            'cash_player_killed_hostage': '',
+            'cash_player_killed_teammate': '',
+            'cash_player_rescued_hostage': '',
+            'cash_team_elimination_bomb_map': '',
+            'cash_team_elimination_hostage_map_t': '',
+            'cash_team_elimination_hostage_map_ct': '',
+            'cash_team_hostage_alive': '',
+            'cash_team_hostage_interaction': '',
+            'cash_team_loser_bonus': '',
+            'cash_team_bonus_shorthanded': '',
+            'mp_starting_losses': '',
+            'cash_team_loser_bonus_consecutive_rounds': '',
+            'cash_team_planted_bomb_but_defused': '',
+            'cash_team_rescued_hostage': '',
+            'cash_team_terrorist_win_bomb': '',
+            'cash_team_win_by_defusing_bomb': '',
+            'cash_team_win_by_hostage_rescue': '',
+            'cash_team_win_by_time_running_out_hostage': '',
+            'cash_team_win_by_time_running_out_bomb': '',
+            
+            // Friendly Fire Commands
+            'ff_damage_reduction_bullets': '',
+            'ff_damage_reduction_grenade': '',
+            'ff_damage_reduction_grenade_self': '',
+            'ff_damage_reduction_other': '',
+            
+            // Match Play Commands
+            'mp_afterroundmoney': '',
+            'mp_buytime': '',
+            'mp_buy_anywhere': '',
+            'mp_buy_during_immunity': '',
+            'mp_death_drop_defuser': '',
+            'mp_death_drop_grenade': '0=none, 1=best, 2=current or best',
+            'mp_death_drop_gun': '0=none, 1=best, 2=current or best',
+            'mp_defuser_allocation': '',
+            'mp_force_pick_time': '',
+            'mp_forcecamera': 'Set to 1 for team only spectating.',
+            'mp_free_armor': '',
+            'mp_freezetime': '',
+            'mp_friendlyfire': '',
+            'mp_win_panel_display_time': '',
+            'mp_respawn_immunitytime': 'disabling immunity in warmup too for 1v1 fights',
+            'mp_halftime': '',
+            'mp_match_can_clinch': '0=No mercy rule, 1=team can clinch match win early if they win > 1/2 total rounds',
+            'mp_maxmoney': '',
+            'mp_maxrounds': '',
+            'mp_playercashawards': '',
+            'mp_roundtime': '',
+            'mp_roundtime_hostage': '',
+            'mp_roundtime_defuse': '',
+            'mp_solid_teammates': '',
+            'mp_startmoney': '',
+            'mp_teamcashawards': '',
+            'mp_timelimit': '',
+            'mp_technical_timeout_per_team': '',
+            'mp_technical_timeout_duration_s': '',
+            'mp_warmuptime': '',
+            'mp_warmuptime_all_players_connected': '',
+            'mp_weapons_allow_zeus': '',
+            'mp_weapons_allow_map_placed': '',
+            'mp_weapons_glow_on_ground': '',
+            'mp_display_kill_assists': '',
+            'mp_respawn_on_death_t': '',
+            'mp_respawn_on_death_ct': '',
+            'mp_ct_default_melee': '',
+            'mp_ct_default_secondary': '',
+            'mp_ct_default_primary': '',
+            'mp_t_default_melee': '',
+            'mp_t_default_secondary': '',
+            'mp_t_default_primary': '',
+            'mp_default_team_winner_no_objective': '2 == CTs, 3 == Ts',
+            
+            // Server Commands
+            'sv_allow_votes': 'Voting allowed in this mode',
+            'sv_talk_enemy_living': '',
+            'sv_talk_enemy_dead': '',
+            'sv_auto_full_alltalk_during_warmup_half_end': '',
+            'sv_deadtalk': '',
+            'sv_ignoregrenaderadio': '',
+            'sv_grenade_trajectory_time_spectator': '',
+            
+            // Ammo Commands
+            'ammo_grenade_limit_flashbang': '',
+            'ammo_grenade_limit_total': '',
+            'sv_infinite_ammo': '',
+            
+            // Spawn Commands
+            'mp_randomspawn': '',
+            'mp_randomspawn_los': '',
+            
+            // TV/Spectator Commands
+            'tv_delay': '',
+            'spec_freeze_time': '',
+            'spec_freeze_panel_extended_time': '',
+            
+            // Default Spawn Commands
+            'mp_ct_default_melee': '',
+            'mp_ct_default_secondary': '',
+            'mp_ct_default_primary': '',
+            'mp_t_default_melee': '',
+            'mp_t_default_secondary': '',
+            'mp_t_default_primary': ''
+        };
+        
+        return cfgComments[commandName] || '';
+    }
+
     /* 6.5 Function to get command descriptions with min/max values, command names, and default values */
     function getCommandDescription(commandName, defaultValue = '') {
         const commandInfo = {
@@ -1037,7 +1169,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (value !== '' && (value !== cvar.defaultValue || showAllCheckbox.checked)) {
                     const paddedCvar = cvar.cvarName.padEnd(maxCvarLength + 4, ' ');
                     const paddedValue = ('"' + value + '"').padEnd(maxValueLength + 4, ' ');
-                    output.value += paddedCvar + paddedValue + '// ' + cvar.comment + '\n';
+                    const cfgComment = getCfgComment(cvar.cvarName);
+                    output.value += paddedCvar + paddedValue + '// ' + cfgComment + '\n';
                 }
             }
         });

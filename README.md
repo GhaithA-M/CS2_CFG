@@ -56,42 +56,4 @@ The `commands.py` script automatically categorizes CS2 server commands based on 
 | `ds` | **Default Spawn** - Spawn settings | Contains: `spawn`, `default_` |
 | `misc` | **Miscellaneous** - Other server settings | Contains: `sv_`, `tv_`, `spec_` |
 | `custom` | **Custom** - Everything else | Commands that don't match any other pattern |
-
-### **How It Works:**
-
-The `auto_categorize_command()` function in `commands.py` uses these rules:
-
-1. **Exact matches** for specific commands (like `hostname` → `gen`)
-2. **Pattern matching** for command prefixes and keywords
-3. **Fallback to `custom`** for any unmatched commands
-
-### **Adding New Categories:**
-
-To add a new category, modify the `auto_categorize_command()` function in `commands.py`:
-
-```python
-def auto_categorize_command(cvar_name):
-    cvar_lower = cvar_name.lower()
-    
-    # Add your new category rule here
-    elif any(word in cvar_lower for word in ['your_keyword']):
-        return 'your_category'
-    
-    # ... existing rules ...
-```
-
-### **Category Display:**
-
-These categories correspond to the accordion sections in the GUI:
-- **General** - Server hostname, passwords, basic settings
-- **Surfing & Bunnyhopping** - Movement and physics settings  
-- **Time** - Round timing, freeze time, warmup
-- **Bot** - AI player behavior and settings
-- **Cash** - Economy, money rewards, starting cash
-- **Friendly Fire** - Team damage settings
-- **Multiplayer** - Game mode, player limits, round settings
-- **Talking & Voting** - Communication and voting systems
-- **Ammo** - Weapon ammunition and grenade settings
-- **Default Spawn** - Player spawn settings
-- **Miscellaneous** - Other server variables
-- **Custom** - Uncategorized commands
+----------------------------------------------------------------------------------
