@@ -4,7 +4,7 @@ A web app for CS2 server operators, used to create / customize configuration fil
 Has the ability to reformat your existing .cfg and retain it's comments and values into a custom **server.cfg**.
 
 For creating your own **custom.json**, I've provided a python script.
-The cvars are derived from the default **gamemode_competitive.cfg** configuration file that runs on fresh official CS2 casual servers.
+The cvars are derived from the default **gamemode_competitive.cfg** configuration file that runs on official CS2 competitive servers.
 Included in the **python** folder is a simple script which automates the process of adapting any **gamemode_#.cfg** file to .json.
 
 ----------------------------------------------------------------------------------
